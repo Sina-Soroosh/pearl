@@ -1,19 +1,112 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "@/styles/modules/Header/Header.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBars,
   faCartShopping,
   faChevronDown,
   faHeart,
   faMagnifyingGlass,
   faUser,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
+  const [isShowMenu, setIsShowMenu] = useState(false);
+
+  const hideMenuHandler = () => {
+    setIsShowMenu(false);
+  };
+
+  const showMenuHandler = () => {
+    setIsShowMenu(true);
+  };
+
   return (
     <>
+      {isShowMenu ? (
+        <div className={styles.cover_page} onClick={hideMenuHandler}></div>
+      ) : null}
+      <div
+        className={`${styles.menu_mobile} ${isShowMenu ? styles.active : ""}`}
+      >
+        <div className={styles.menu}>
+          <ul>
+            <li>
+              <Link href="/">
+                <span>صفحه اصلی</span>
+              </Link>
+            </li>
+            <li>
+              <Link href="/shop">
+                <span>فروشگاه</span>
+              </Link>
+            </li>
+            <li className="sup-item">
+              <Link href="#">
+                <span>صفحات</span>
+                <div className={styles.arrow}>
+                  <FontAwesomeIcon icon={faChevronDown} />
+                </div>
+              </Link>
+              <ul className={styles.sub_list}>
+                <li>
+                  <Link href="/about-us">درباره ما</Link>
+                </li>
+                <li>
+                  <Link href="/faq">سوالات متداول</Link>
+                </li>
+                <li>
+                  <Link href="/warranty-and-services">گارانتی و خدمات</Link>
+                </li>
+                <li>
+                  <Link href="/term-conditions">قوانین و مقرارت</Link>
+                </li>
+                <li>
+                  <Link href="/support">پشتیبانی</Link>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <Link href="/contact-us">
+                <span>تماس با ما</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+        <div className={styles.bottom_menu_mobile}>
+          <div className={styles.icons}>
+            <ul>
+              <li>
+                <Link href="/my-favorites">
+                  <FontAwesomeIcon icon={faHeart} />
+                </Link>
+              </li>
+              <li>
+                <Link href="/my-favorites">
+                  <FontAwesomeIcon icon={faMagnifyingGlass} />
+                </Link>
+              </li>
+              <li>
+                <Link href="/my-favorites">
+                  <FontAwesomeIcon icon={faUser} />
+                </Link>
+              </li>
+              <li>
+                <Link href="/my-favorites">
+                  <FontAwesomeIcon icon={faCartShopping} />
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className={styles.close_btn} onClick={hideMenuHandler}>
+          <FontAwesomeIcon icon={faXmark} />
+        </div>
+      </div>
+
       <header>
         <div className={styles.content_header}>
           <div className={styles.right_header}>
@@ -100,6 +193,9 @@ function Header() {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className={styles.menu_logo} onClick={showMenuHandler}>
+            <FontAwesomeIcon icon={faBars} />
           </div>
         </div>
       </header>
