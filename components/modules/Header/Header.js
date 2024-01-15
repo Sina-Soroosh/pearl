@@ -15,6 +15,7 @@ import {
 
 function Header() {
   const [isShowMenu, setIsShowMenu] = useState(false);
+  const [isShowSearchBar, setIsShowSearchBar] = useState(false);
 
   const hideMenuHandler = () => {
     setIsShowMenu(false);
@@ -24,11 +25,44 @@ function Header() {
     setIsShowMenu(true);
   };
 
+  const hideSearchbarHandler = () => {
+    setIsShowSearchBar(false);
+  };
+
+  const showSearchbarHandler = (e) => {
+    e.preventDefault();
+
+    hideMenuHandler();
+    setIsShowSearchBar(true);
+  };
+
   return (
     <>
       {isShowMenu ? (
         <div className={styles.cover_page} onClick={hideMenuHandler}></div>
       ) : null}
+
+      <div
+        className={`${styles.searchbar} ${
+          isShowSearchBar ? styles.active : ""
+        }`}
+      >
+        <div className={styles.content_searchbar}>
+          <form>
+            <input type="search" placeholder="دنبال چی میگردی ..." />
+            <div className={styles.search_icon}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </div>
+          </form>
+          <div
+            className={styles.close_btn_searchbar}
+            onClick={hideSearchbarHandler}
+          >
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
+        </div>
+      </div>
+
       <div
         className={`${styles.menu_mobile} ${isShowMenu ? styles.active : ""}`}
       >
@@ -85,7 +119,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/my-favorites">
+                <Link href="#" onClick={showSearchbarHandler}>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </Link>
               </li>
@@ -177,7 +211,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/my-favorites">
+                  <Link href="#" onClick={showSearchbarHandler}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                   </Link>
                 </li>

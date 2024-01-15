@@ -7,6 +7,55 @@
     display: none;
 }
 
+.searchbar {
+    position: fixed;
+    z-index: 3;
+    inset: 0;
+    background: rgb(53 53 53 / 79%);
+    display: none;
+}
+
+.searchbar.active {
+    display: block;
+}
+
+.content_searchbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.content_searchbar form {
+    display: flex;
+    margin: 10px;
+    position: relative;
+}
+
+.content_searchbar form input {
+    width: 350px;
+    height: 45px;
+    padding: 15px;
+    background: #75757552;
+    border-width: 0 2px 2px 0;
+    border-color: var(--black);
+    max-width: 100%;
+    color: var(--color-main);
+}
+
+.content_searchbar form .search_icon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    cursor: pointer;
+}
+
+.close_btn_searchbar,
+.search_icon {
+    width: 20px;
+    cursor: pointer;
+}
+
 .menu_mobile {
     position: fixed;
     background: rgb(53, 53, 53);
