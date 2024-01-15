@@ -1,0 +1,106 @@
+.content_header {
+    padding: 40px 40px 40px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo img {
+    width: 150px;
+    height: auto;
+}
+
+.list>ul {
+    display: flex;
+}
+
+.list ul li {
+    position: relative;
+}
+
+.list ul li a {
+    position: relative;
+    margin: 0 5px;
+    padding: 0px 5px 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    color: var(--black);
+}
+
+.list ul li a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 10px;
+    background: var(--beige);
+    width: 100%;
+    opacity: 0.8;
+    z-index: -1;
+    transition: 0.3s;
+    height: 0;
+}
+
+.list ul li a:hover:before {
+    height: 10px;
+}
+
+.list .sub_list {
+    padding: 20px 0;
+    position: absolute;
+    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.05);
+    width: 200px;
+    border-radius: 5px;
+    top: 150%;
+    transition: 0.3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.list ul li:hover .sub_list {
+    opacity: 1;
+    visibility: visible;
+    top: 125%;
+}
+
+.list ul li:hover .arrow {
+    transform: rotate(180deg);
+}
+
+.list .sub_list li a {
+    margin: 0;
+    padding: 5px 5px;
+}
+
+.list .sub_list li a:hover {
+    color: var(--orange);
+    background-color: var(--gray);
+}
+
+.list .sub_list li a:hover::before {
+    height: 0;
+}
+
+.arrow {
+    width: 10px;
+    margin-right: 5px;
+    transition: 0.3s;
+}
+
+.left_header .icons ul {
+    display: flex;
+}
+
+.left_header .icons ul li a {
+    display: flex;
+    color: var(--black);
+    width: 20px;
+    height: 20px;
+    margin: 0px 10px;
+    transition: 0.3s;
+    color: var(--orange);
+    opacity: 0.6;
+}
+
+.left_header .icons ul li a:hover {
+    opacity: 1;
+}
