@@ -32,8 +32,10 @@ function Slider() {
                 </div>
                 <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
                   <div className="row">
-                    <div className="col-4 d-flex justify-content-center align-items-center">
-                      <div className={styles.content_slide}>
+                    <div
+                      className={`col-lg-4 col-md-12 ${styles.content_slide}`}
+                    >
+                      <div>
                         <div className={styles.title_slide}>
                           <h3>چراغ</h3>
                         </div>
@@ -45,7 +47,7 @@ function Slider() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-lg-7 col-md-12">
                       <div className={styles.image_slide}>
                         <MouseParallaxChild factorX={0.5} factorY={0.5}>
                           <img src="https://auros.1webstar.ir/wp-content/uploads/2022/10/home7_layer3.png" />
@@ -63,8 +65,10 @@ function Slider() {
                 </div>
                 <MouseParallaxContainer globalFactorX={0.1} globalFactorY={0.1}>
                   <div className="row">
-                    <div className="col-4 d-flex justify-content-center align-items-center">
-                      <div className={styles.content_slide}>
+                    <div
+                      className={`col-lg-4 col-md-12 ${styles.content_slide}`}
+                    >
+                      <div>
                         <div className={styles.title_slide}>
                           <h3>سر گوزن</h3>
                         </div>
@@ -76,7 +80,7 @@ function Slider() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-lg-7 col-md-12">
                       <div className={styles.image_slide}>
                         <MouseParallaxChild factorX={0.5} factorY={0.5}>
                           <img src="https://auros.1webstar.ir/wp-content/uploads/2022/10/home7_layer2.png" />
@@ -94,8 +98,10 @@ function Slider() {
                     <div className={styles.back_slide}>
                       <img src="/images/slide.png" />
                     </div>
-                    <div className="col-4 d-flex justify-content-center align-items-center">
-                      <div className={styles.content_slide}>
+                    <div
+                      className={`col-lg-4 col-md-12 ${styles.content_slide}`}
+                    >
+                      <div>
                         <div className={styles.title_slide}>
                           <h3>لوستر</h3>
                         </div>
@@ -107,7 +113,7 @@ function Slider() {
                         </div>
                       </div>
                     </div>
-                    <div className="col-7">
+                    <div className="col-lg-7 col-md-12">
                       <div className={styles.image_slide}>
                         <MouseParallaxChild factorX={0.5} factorY={0.5}>
                           <img src="https://auros.1webstar.ir/wp-content/uploads/2022/10/home7_layer4.png" />
