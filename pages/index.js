@@ -1,3 +1,4 @@
+import Categories from "@/components/templates/Home/Categories";
 import PopularProducts from "@/components/templates/Home/PopularProducts";
 import Slider from "@/components/templates/Home/Slider";
 import Head from "next/head";
@@ -11,6 +12,7 @@ function Home() {
       </Head>
       <Slider />
       <PopularProducts />
+      <Categories />
     </>
   );
 }
