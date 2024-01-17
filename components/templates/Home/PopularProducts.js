@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/templates/Home/PopularProducts.module.css";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
+import Link from "next/link";
 
 function PopularProducts() {
   return (
@@ -26,6 +27,10 @@ function PopularProducts() {
               <ProductCart />
               <ProductCart />
               <ProductCart />
+            </div>
+
+            <div className={styles.products_link}>
+              <Link href="/shop">+ نمایش همه محصولات</Link>
             </div>
           </div>
         </div>
