@@ -209,7 +209,9 @@
     top: 150%;
     transition: 0.3s;
     opacity: 0;
+    background-color: var(--color-main);
     visibility: hidden;
+    z-index: 2;
 }
 
 .list ul li:hover .sub_list {

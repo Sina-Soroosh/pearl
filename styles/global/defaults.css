@@ -46,4 +46,23 @@ i {
   user-select: none;
 }
 
+.swiper-slide {
+  opacity: 0 !important;
+}
+
+.swiper-slide.swiper-slide-visible {
+  opacity: 1 !important;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #fff !important;
+  transition: 0.3s;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #adadad !important;
+}
+
 /* Finish Default Styles */
