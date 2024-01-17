@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/styles/templates/Home/PopularProducts.module.css";
+import ProductCart from "@/components/modules/ProductCart/ProductCart";
 
 function PopularProducts() {
   return (
@@ -16,7 +17,16 @@ function PopularProducts() {
                 کف پوش، لامپ و … محقق کنید!
               </p>
             </div>
-            <div className="row"></div>
+            <div className="row">
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+              <ProductCart />
+            </div>
           </div>
         </div>
       </div>

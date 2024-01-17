@@ -1,11 +1,15 @@
 .content {
-    padding: 100px 0;
+    padding: 100px 50px;
     text-align: center;
 }
 
 .content .title h2 {
     font-size: 35px;
     font-weight: 700;
+}
+
+.content .desc {
+    margin-bottom: 50px;
 }
 
 .content .desc p {

@@ -1,0 +1,103 @@
+.content {
+    margin-bottom: 30px;
+}
+
+.content .top_cart {
+    position: relative;
+    overflow: hidden;
+}
+
+.content .image_cart img {
+    width: 100%;
+}
+
+.content .add_cart button {
+    width: 100%;
+    border: none;
+    background: var(--black);
+    color: #fff;
+    padding: 10px 0;
+    position: absolute;
+    right: 0;
+    transition: .3s;
+    bottom: -50px;
+}
+
+.content .top_cart:hover .add_cart button {
+    bottom: 0;
+}
+
+.content .unavailable {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #cdcdcda6;
+}
+
+.content .unavailable span {
+    display: block;
+    background: #fff;
+    padding: 0px 17px;
+    color: #838383;
+}
+
+.content .discount {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.content .discount span {
+    display: block;
+    padding: 0 5px;
+    font-size: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.content .discount span::before {
+    content: "";
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    background-color: var(--beige);
+    height: 5px;
+    z-index: -1;
+}
+
+.content .heart {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.content .heart span {
+    display: block;
+    width: 20px;
+    height: 20px;
+    color: #e30000;
+    cursor: pointer;
+}
+
+.content .bottom_cart {
+    padding: 15px 0;
+}
+
+.content .bottom_cart .title h2 {
+    font-size: 17px;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.content .bottom_cart .price {
+    font-size: 15px;
+}
+
+.content .bottom_cart .price .discount_price {
+    margin: 0 4px;
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #838383;
+}
