@@ -89,10 +89,12 @@
     font-size: 17px;
     margin-bottom: 10px;
     font-weight: 700;
+    text-align: center;
 }
 
 .content .bottom_cart .price {
     font-size: 15px;
+    text-align: center;
 }
 
 .content .bottom_cart .price .discount_price {

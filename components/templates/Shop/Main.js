@@ -3,6 +3,7 @@ import styles from "@/styles/templates/Shop/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import FilterProducts from "@/components/modules/FilterProducts/FilterProducts";
 import OrderBy from "@/components/modules/OrderBy/OrderBy";
+import ProductCart from "@/components/modules/ProductCart/ProductCart";
 
 function Main() {
   return (
@@ -19,6 +20,22 @@ function Main() {
           </div>
           <div className={styles.order}>
             <OrderBy />
+          </div>
+        </div>
+        <div className={styles.main_content}>
+          <div className="row">
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
+            <ProductCart />
           </div>
         </div>
       </div>
