@@ -1,0 +1,143 @@
+.cover_page {
+    inset: 0;
+    position: fixed;
+    background-color: #0000005e;
+    z-index: 3;
+    cursor: not-allowed;
+}
+
+.content_filter {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    background: #fff;
+    right: calc(0% - 350px);
+    width: 100%;
+    max-width: 350px;
+    padding: 20px;
+    z-index: 4;
+    overflow: auto;
+    transition: .3s;
+}
+
+.content_filter.active {
+    right: 0;
+}
+
+.content_filter .close {
+    text-align: left;
+    padding: 10px 0;
+    border-bottom: 2px solid #000;
+}
+
+.content_filter .close p {
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.content_filter>div {
+    margin: 20px 0;
+}
+
+.content_filter .title {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.content_filter .categories ul {
+    margin: 20px 0;
+}
+
+.content_filter .categories li a {
+    color: #000000;
+    font-size: 15px;
+    display: block;
+    padding: 7px 0;
+    border-bottom: 1px dashed #585858;
+    position: relative;
+    display: flex;
+    align-items: center;
+    transition: .3s;
+}
+
+.content_filter .categories li a::before {
+    content: "";
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    border: 1px solid #585858;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.content_filter .categories li a.active::before {
+    border: 3px solid var(--orange);
+}
+
+.content_filter .categories li a:hover {
+    color: var(--orange);
+}
+
+.content_filter .categories li a:hover::before {
+    border: 3px solid var(--orange);
+}
+
+.slider .slider_input {
+    color: var(--orange);
+}
+
+.content_filter .price button {
+    width: 100%;
+    margin: 10px 0;
+    border: none;
+    background: var(--orange);
+    color: #fff;
+    border-radius: 50px;
+}
+
+.btn_filter button {
+    background: transparent;
+    border: navajowhite;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.btn_filter button span {
+    display: inline-block;
+    transition: .3s;
+}
+
+.btn_filter button:hover span {
+    transform: rotate(90deg);
+}
+
+.active_filter {
+    margin: 10px 0;
+}
+
+.active_filter .title p {
+    font-size: 15px;
+}
+
+.active_filter .boxes_filter {
+    display: flex;
+    margin: 10px 0;
+}
+
+.active_filter .boxes_filter .box_filter {
+    padding: 5px;
+    border: 1px solid #787676;
+    font-size: 12px;
+    font-weight: 700;
+    color: #646464;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.active_filter .boxes_filter .box_filter:hover {
+    color: var(--orange);
+    border: 1px solid var(--orange);
+}
