@@ -1,0 +1,11 @@
+.order {
+    width: 250px;
+    max-width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.order_item {
+    font-weight: 700;
+    font-size: 16px;
+}

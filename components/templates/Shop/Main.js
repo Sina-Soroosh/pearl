@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/templates/Shop/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import FilterProducts from "@/components/modules/FilterProducts/FilterProducts";
+import OrderBy from "@/components/modules/OrderBy/OrderBy";
 
 function Main() {
   return (
@@ -15,6 +16,9 @@ function Main() {
         <div className={styles.top_content}>
           <div className={styles.filter}>
             <FilterProducts />
+          </div>
+          <div className={styles.order}>
+            <OrderBy />
           </div>
         </div>
       </div>

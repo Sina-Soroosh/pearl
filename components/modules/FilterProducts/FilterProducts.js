@@ -12,10 +12,18 @@ function FilterProducts() {
   const { max_price, min_price } = router.query;
 
   const activeFilter = () => {
-    const { pathname } = router;
+    const { query, pathname } = router;
+
+    let newAddress = pathname + "?";
+
+    for (const [key, value] of Object.entries(query)) {
+      if (key !== "min_price" && key !== "max_price") {
+        newAddress += `${key}=${value}&`;
+      }
+    }
 
     router.push(
-      `${pathname}/?min_price=${valueSlider[0]}&max_price=${valueSlider[1]}`
+      `${newAddress}min_price=${valueSlider[0]}&max_price=${valueSlider[1]}`
     );
 
     hideFilterHandler();
@@ -30,22 +38,31 @@ function FilterProducts() {
   };
 
   const removeMinPrice = () => {
-    const { pathname } = router;
-    if (max_price) {
-      router.push(`${pathname}/?max_price=${max_price}`);
-    } else {
-      router.push(`${pathname}/`);
+    const { query, pathname } = router;
+
+    let newAddress = pathname + "?";
+
+    for (const [key, value] of Object.entries(query)) {
+      if (key !== "min_price") {
+        newAddress += `${key}=${value}&`;
+      }
     }
+
+    router.push(newAddress);
   };
 
   const removeMaxPrice = () => {
-    const { pathname } = router;
+    const { query, pathname } = router;
 
-    if (min_price) {
-      router.push(`${pathname}/?min_price=${min_price}`);
-    } else {
-      router.push(`${pathname}/`);
+    let newAddress = pathname + "?";
+
+    for (const [key, value] of Object.entries(query)) {
+      if (key !== "max_price") {
+        newAddress += `${key}=${value}&`;
+      }
     }
+
+    router.push(newAddress);
   };
 
   return (
