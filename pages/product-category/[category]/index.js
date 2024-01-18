@@ -1,7 +1,7 @@
 import Main from "@/components/templates/ProductCategory/Main";
 import React from "react";
 
-function index() {
+function Category() {
   return (
     <>
       <Main />
@@ -9,4 +9,4 @@ function index() {
   );
 }
 
-export default index;
+export default Category;

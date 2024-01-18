@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "@/styles/modules/Header/Header.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,10 +12,13 @@ import {
   faUser,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { useRouter } from "next/router";
 
 function Header() {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowSearchBar, setIsShowSearchBar] = useState(false);
+  const router = useRouter();
+  const keySearchInputRef = useRef();
 
   const hideMenuHandler = () => {
     setIsShowMenu(false);
@@ -36,6 +39,14 @@ function Header() {
     setIsShowSearchBar(true);
   };
 
+  const searchHandler = (e) => {
+    e?.preventDefault();
+
+    router.push(`/search/?q=${keySearchInputRef.current.value}`);
+    keySearchInputRef.current.value = "";
+    hideSearchbarHandler();
+  };
+
   return (
     <>
       {isShowMenu ? (
@@ -48,10 +59,17 @@ function Header() {
         }`}
       >
         <div className={styles.content_searchbar}>
-          <form>
-            <input type="search" placeholder="دنبال چی میگردی ..." />
+          <form onSubmit={searchHandler}>
+            <input
+              type="search"
+              placeholder="دنبال چی میگردی ..."
+              ref={keySearchInputRef}
+            />
             <div className={styles.search_icon}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                onClick={searchHandler}
+              />
             </div>
           </form>
           <div
