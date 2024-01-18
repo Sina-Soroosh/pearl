@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "@/styles/global/custom.css";
 import Header from "@/components/modules/Header/Header";
 import Head from "next/head";
+import Footer from "@/components/modules/Footer/Footer";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -15,6 +16,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Header />
       <Component {...pageProps} />
+      <Footer />
     </>
   );
 }
