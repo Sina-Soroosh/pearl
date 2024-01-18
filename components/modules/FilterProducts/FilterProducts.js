@@ -88,15 +88,15 @@ function FilterProducts() {
               <Link href="/shop">دسته بندی نشده</Link>
             </li>
             <li>
-              <Link href="/" className={styles.active}>
+              <Link href="/product-category/test" className={styles.active}>
                 مبل
               </Link>
             </li>
             <li>
-              <Link href="/">صندلی</Link>
+              <Link href="/product-category/test">صندلی</Link>
             </li>
             <li>
-              <Link href="/">دکور</Link>
+              <Link href="/product-category/test">دکور</Link>
             </li>
           </ul>
         </div>

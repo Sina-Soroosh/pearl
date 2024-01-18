@@ -1,0 +1,19 @@
+.content {
+    padding: 40px;
+}
+
+.content .top_content {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content .main_content {
+    margin: 20px 0;
+}
+
+@media screen and (max-width : 768px) {
+    .content .top_content {
+        display: block;
+        text-align: center;
+    }
+}

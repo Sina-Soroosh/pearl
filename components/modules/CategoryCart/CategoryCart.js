@@ -9,7 +9,7 @@ function CategoryCart() {
         <div className={styles.category_cart}>
           <div className={styles.content}>
             <div className={styles.title}>
-              <Link href="/">
+              <Link href="/product-category/test">
                 <h2>صندلی</h2>
               </Link>
             </div>
@@ -17,7 +17,7 @@ function CategoryCart() {
               <span>4 مورد</span>
             </div>
             <div className={styles.link}>
-              <Link href="/">+ نمایش مجموعه</Link>
+              <Link href="/product-category/test">+ نمایش مجموعه</Link>
             </div>
           </div>
         </div>
