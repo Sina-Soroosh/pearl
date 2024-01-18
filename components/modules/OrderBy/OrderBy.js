@@ -34,20 +34,41 @@ function OrderBy() {
         displayEmpty
         inputProps={{ "aria-label": "Without label" }}
         className={styles.order}
+        style={{ fontSize: "16px" }}
       >
-        <MenuItem className={styles.order_item} value="default">
+        <MenuItem
+          style={{ fontSize: "16px" }}
+          className={styles.order_item}
+          value="default"
+        >
           مرتب سازی براساس پیش فرض
         </MenuItem>
-        <MenuItem className={styles.order_item} value={"rating"}>
+        <MenuItem
+          style={{ fontSize: "16px" }}
+          className={styles.order_item}
+          value={"rating"}
+        >
           مرتب سازی براساس امتیاز
         </MenuItem>
-        <MenuItem className={styles.order_item} value={"date"}>
+        <MenuItem
+          style={{ fontSize: "16px" }}
+          className={styles.order_item}
+          value={"date"}
+        >
           مرتب سازی براساس جدیدترین
         </MenuItem>
-        <MenuItem className={styles.order_item} value={"cheapest"}>
+        <MenuItem
+          style={{ fontSize: "16px" }}
+          className={styles.order_item}
+          value={"cheapest"}
+        >
           مرتب سازی براساس ارزان ترین
         </MenuItem>
-        <MenuItem className={styles.order_item} value={"expensive"}>
+        <MenuItem
+          style={{ fontSize: "16px" }}
+          className={styles.order_item}
+          value={"expensive"}
+        >
           مرتب سازی براساس گران ترین
         </MenuItem>
       </Select>

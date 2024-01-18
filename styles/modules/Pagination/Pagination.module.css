@@ -1,0 +1,24 @@
+.pagination {
+    display: flex;
+}
+
+.pagination li {
+    border: 1px solid #d9d4d4;
+    padding: 0px 15px;
+    color: #d9d4d4;
+    cursor: pointer;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.pagination li.prev_page,
+.pagination li.next_page {
+    background-color: var(--gray);
+    color: #000;
+}
+
+.pagination li.active,
+.pagination li:hover {
+    border: 1px solid #000;
+    color: #000;
+}

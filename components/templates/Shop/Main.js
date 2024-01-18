@@ -4,6 +4,7 @@ import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import FilterProducts from "@/components/modules/FilterProducts/FilterProducts";
 import OrderBy from "@/components/modules/OrderBy/OrderBy";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
+import Pagination from "@/components/modules/Pagination/Pagination";
 
 function Main() {
   return (
@@ -38,6 +39,7 @@ function Main() {
             <ProductCart />
           </div>
         </div>
+        <Pagination lastPage={3} />
       </div>
     </>
   );
