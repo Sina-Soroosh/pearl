@@ -9,6 +9,7 @@ import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CommentBox from "@/components/modules/CommentBox/CommentBox";
 import CreateComment from "@/components/modules/CreateComment/CreateComment";
+import ProductCart from "@/components/modules/ProductCart/ProductCart";
 
 function Main() {
   const [isZoomImage, setIsZoomImage] = useState(false);
@@ -181,6 +182,17 @@ function Main() {
                     </div>
                   </TabPanel>
                 </TabContext>
+              </div>
+            </div>
+            <div className="col-12">
+              <div className={styles.related_products}>
+                <h4>محصولات مرتبط</h4>
+                <div className="row">
+                  <ProductCart />
+                  <ProductCart />
+                  <ProductCart />
+                  <ProductCart />
+                </div>
               </div>
             </div>
           </div>

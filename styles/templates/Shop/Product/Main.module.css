@@ -133,6 +133,13 @@
     background-color: #f5f6fa;
 }
 
+.product .related_products h4 {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
 @media screen and (max-width : 768px) {
     .product {
         padding: 50px 0;
