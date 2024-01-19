@@ -14,11 +14,13 @@
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mui/lab": "^5.0.0-alpha.161",
     "@mui/material": "^5.15.5",
     "bootstrap": "^5.3.2",
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-medium-image-zoom": "^5.1.10",
     "react-parallax-mouse": "^2.1.0",
     "swiper": "^11.0.5"
   }

@@ -1,0 +1,140 @@
+.product {
+    padding: 50px;
+}
+
+.product .image_product {
+    position: relative;
+}
+
+.product .image_product img {
+    width: 100%;
+}
+
+.product .image_product .zoom_icon {
+    display: block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: var(--orange);
+    cursor: pointer;
+}
+
+.product .info_product {
+    padding: 0 10px;
+}
+
+.product .info_product .title {
+    margin: 10px 0;
+}
+
+.product .info_product .title h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.product .info_product .price {
+    margin: 10px 0;
+}
+
+.product .info_product .price span {
+    font-size: 18px;
+    font-weight: 600;
+    color: #858585;
+}
+
+.product .info_product .price .discount {
+    font-size: 14px;
+    text-decoration: line-through;
+}
+
+.product .info_product .desc {
+    margin: 15px 0;
+}
+
+.product .info_product .desc *,
+.product .tabs * {
+    font-size: 17px;
+    color: #858585;
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.product .info_product .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.product .info_product .buttons button {
+    width: 100%;
+    margin: 0 5px;
+    border: none;
+    padding: 5px 0;
+    border-radius: 5px;
+    color: #fff;
+    transition: .3s;
+}
+
+.product .info_product .buttons .add_cart {
+    background-color: var(--orange);
+}
+
+.product .info_product .buttons .add_favorites {
+    background-color: #e1003e;
+}
+
+.product .info_product .buttons button:hover {
+    opacity: .9;
+}
+
+.product .info_product .unavailable p {
+    color: #d30303;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.product .info_product .category span {
+    font-size: 16px;
+    color: var(--black);
+}
+
+.product .info_product .category span a {
+    color: #858585;
+    font-weight: 700;
+}
+
+.product .tabs {
+    margin: 40px 0;
+}
+
+.product .tabs .details {
+    width: 100%;
+}
+
+.product .tabs .details tr * {
+    border: 1px solid #e9ecef;
+    padding: 10px;
+    font-size: 15px;
+}
+
+.product .tabs .details tr th {
+    font-weight: 700;
+    color: var(--black);
+    width: 30%;
+}
+
+.product .tabs .details tr:nth-child(2n + 1) {
+    background-color: #e8eaed;
+}
+
+.product .tabs .details tr:nth-child(2n) {
+    background-color: #f5f6fa;
+}
+
+@media screen and (max-width : 768px) {
+    .product {
+        padding: 50px 0;
+    }
+}
