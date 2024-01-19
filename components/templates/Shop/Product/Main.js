@@ -8,6 +8,7 @@ import Link from "next/link";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CommentBox from "@/components/modules/CommentBox/CommentBox";
+import CreateComment from "@/components/modules/CreateComment/CreateComment";
 
 function Main() {
   const [isZoomImage, setIsZoomImage] = useState(false);
@@ -175,6 +176,7 @@ function Main() {
                         <CommentBox />
                         <CommentBox />
                         <CommentBox />
+                        <CreateComment />
                       </div>
                     </div>
                   </TabPanel>
