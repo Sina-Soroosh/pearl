@@ -54,7 +54,7 @@
 }
 
 .product .info_product .desc *,
-.product .tabs * {
+.product .tabs .description * {
     font-size: 17px;
     color: #858585;
     text-align: justify;

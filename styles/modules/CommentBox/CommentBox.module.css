@@ -1,0 +1,21 @@
+.comment {
+    margin: 10px 0;
+    border-bottom: 1px solid #d7d7d7;
+}
+
+.comment .content {
+    display: flex;
+}
+
+.comment .content .infos {
+    margin-right: 12px;
+}
+
+.comment .content .infos .name {
+    color: #858585;
+    font-size: 16px;
+}
+
+.comment .content .infos .body {
+    margin: 10px 0;
+}

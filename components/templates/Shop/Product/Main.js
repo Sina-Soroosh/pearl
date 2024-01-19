@@ -7,6 +7,7 @@ import { faMagnifyingGlassPlus } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { Box, Tab } from "@mui/material";
 import { TabContext, TabList, TabPanel } from "@mui/lab";
+import CommentBox from "@/components/modules/CommentBox/CommentBox";
 
 function Main() {
   const [isZoomImage, setIsZoomImage] = useState(false);
@@ -128,7 +129,7 @@ function Main() {
                     </TabList>
                   </Box>
                   <TabPanel value="description">
-                    <div className={styles.desceription}>
+                    <div className={styles.description}>
                       <p>
                         لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
                         چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون
@@ -168,7 +169,15 @@ function Main() {
                       </tbody>
                     </table>
                   </TabPanel>
-                  <TabPanel value="comments">Item Three</TabPanel>
+                  <TabPanel value="comments">
+                    <div className={styles.comments}>
+                      <div className={styles.content}>
+                        <CommentBox />
+                        <CommentBox />
+                        <CommentBox />
+                      </div>
+                    </div>
+                  </TabPanel>
                 </TabContext>
               </div>
             </div>
