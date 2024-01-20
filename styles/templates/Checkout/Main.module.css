@@ -1,3 +1,44 @@
 .checkout {
   padding: 50px;
 }
+
+.checkout .list {
+  padding: 10px 25px;
+  background: var(--gray);
+  position: sticky;
+  top: 10px;
+}
+
+.checkout .list .title {
+  padding: 10px 0;
+  border-bottom: 1px solid #000;
+}
+
+.checkout .list .title h3 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.checkout .list .items li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #000;
+}
+
+.checkout .list .total {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.checkout .list .total span {
+  font-size: 15px;
+  color: #757575;
+}
+
+.checkout .list .total span.price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+}
