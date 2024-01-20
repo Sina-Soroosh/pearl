@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/templates/AboutUs/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import Image from "next/image";
+import AboutBox from "@/components/modules/AboutBox/AboutBox";
 
 function Main() {
   return (
@@ -48,7 +49,23 @@ function Main() {
             <div className={styles.title}>
               <h3>چرا ما...؟</h3>
             </div>
-            <div className="row"></div>
+            <div className="row">
+              <AboutBox
+                img="https://auros.1webstar.ir/wp-content/uploads/2019/03/Support.png"
+                title="پشتیبانی 24/7"
+                desc="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+              />
+              <AboutBox
+                img="https://auros.1webstar.ir/wp-content/uploads/2019/03/Shipping.png"
+                title="ارسال رایگان"
+                desc="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+              />
+              <AboutBox
+                img="https://auros.1webstar.ir/wp-content/uploads/2019/03/Refund.png"
+                title="بازگشت کالا"
+                desc="لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است."
+              />
+            </div>
           </div>
         </div>
       </div>
