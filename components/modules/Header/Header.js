@@ -147,7 +147,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/my-favorites">
+                <Link href="/cart">
                   <FontAwesomeIcon icon={faCartShopping} />
                 </Link>
               </li>
@@ -239,7 +239,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/my-favorites">
+                  <Link href="/cart">
                     <FontAwesomeIcon icon={faCartShopping} />
                   </Link>
                 </li>

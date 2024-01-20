@@ -1,0 +1,63 @@
+.checkout_form .title h3 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.checkout_form .content form {
+    margin: 25px 0;
+}
+
+.checkout_form .content form .input_box {
+    padding: 10px;
+}
+
+.checkout_form form .input_box label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--black);
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.checkout_form form .input_box label span {
+    color: #aa0808;
+}
+
+.checkout_form form .input_box input,
+.checkout_form form .input_box textarea,
+.checkout_form form .input_box select {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--gray);
+    background: var(--gray);
+    color: var(--black);
+    padding: 10px 5px;
+    margin-bottom: 10px;
+}
+
+.checkout_form form .input_box input:focus,
+.checkout_form form .input_box textarea:focus,
+.checkout_form form .input_box select:focus {
+    border: 1px solid var(--orange);
+}
+
+.checkout_form form .input_box span.err {
+    font-size: 15px;
+    font-weight: 700;
+    color: #b50303;
+}
+
+.checkout_form form .submit_btn {
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
+    border: none;
+    background: var(--orange);
+    color: #fff;
+    transition: .3s;
+    padding: 5px 0;
+}
+
+.checkout_form form .submit_btn:hover {
+    opacity: .9;
+}
