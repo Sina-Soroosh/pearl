@@ -1,0 +1,50 @@
+.about_us {
+    padding: 50px;
+    margin: 30px 0;
+}
+
+.about_us .top .title {
+    margin: 20px 0;
+}
+
+.about_us .top .title h3 {
+    font-size: 23px;
+    font-weight: 700;
+}
+
+.about_us .top .desc {
+    margin: 20px 0;
+}
+
+.about_us .top .desc p {
+    margin: 5px 0;
+    color: #000;
+    font-size: 16px;
+    text-align: justify;
+}
+
+.about_us .top .images {
+    margin: 50px 0;
+    padding: 0 100px;
+}
+
+.about_us .top .images img {
+    width: 100%;
+    margin: 10px;
+}
+
+.about_us .main .title h3 {
+    font-size: 27px;
+    font-weight: 700;
+    text-align: center;
+}
+
+@media screen and (max-width : 992px) {
+    .about_us {
+        padding: 50px 10px;
+    }
+
+    .about_us .top .images {
+        padding: 0;
+    }
+}
