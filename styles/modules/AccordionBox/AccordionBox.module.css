@@ -1,0 +1,29 @@
+.body * {
+    color: #858585;
+}
+
+.body h1,
+.body h2,
+.body h3,
+.body h4,
+.body h5,
+.body h6 {
+    margin: 15px 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #000;
+}
+
+.body p {
+    font-size: 14px;
+}
+
+.body ul {
+    list-style: disc;
+    padding: 0 30px;
+}
+
+.body ol {
+    list-style: decimal;
+    padding: 0 30px;
+}
