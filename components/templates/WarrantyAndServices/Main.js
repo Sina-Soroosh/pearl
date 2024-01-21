@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/templates/WarrantyAndServices/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
+import SupportBox from "@/components/modules/SupportBox/SupportBox";
 
 function Main() {
   return (
@@ -71,7 +72,20 @@ function Main() {
               <div className={styles.title}>
                 <h3>نیاز به پشتیبانی دارید؟</h3>
               </div>
-              <div className="row"></div>
+              <div className="row">
+                <div className="col-lg-3 col-md-6">
+                  <SupportBox icon="faMessage" title="پشتیبانی با چت" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <SupportBox icon="faHeadset" title="پشتیبانی با توئیتر" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <SupportBox icon="faPhone" title="پشتیبان تلفنی" />
+                </div>
+                <div className="col-lg-3 col-md-6">
+                  <SupportBox icon="faPeopleArrows" title="فرم تماس با ما" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
