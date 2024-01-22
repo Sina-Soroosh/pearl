@@ -1,0 +1,13 @@
+.contact_us {
+    margin: 100px 0;
+}
+
+.contact_us .texts span {
+    font-size: 14px;
+    color: #585858;
+}
+
+.contact_us .texts h3 {
+    font-size: 24px;
+    font-weight: 700;
+}
