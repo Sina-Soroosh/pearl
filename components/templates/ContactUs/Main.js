@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/templates/ContactUs/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
+import ContactUsForm from "@/components/modules/ContactUsForm/ContactUsForm";
 
 function Main() {
   return (
@@ -19,7 +20,9 @@ function Main() {
               </div>
             </div>
             <div className="col-md-8">
-              <div className={styles.form}></div>
+              <div className={styles.form}>
+                <ContactUsForm />
+              </div>
             </div>
           </div>
         </div>
