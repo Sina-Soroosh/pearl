@@ -3,6 +3,8 @@
     border: 1px solid var(--gray);
     margin: 20px 5px;
     transition: .3s;
+    background-color: #fff;
+    height: 100%;
 }
 
 .box:hover {
