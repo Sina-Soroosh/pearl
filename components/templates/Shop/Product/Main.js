@@ -83,9 +83,6 @@ function Main() {
                   <button className={styles.add_cart}>
                     افزودن به سبد خرید
                   </button>
-                  <button className={styles.add_favorites}>
-                    افزودن به لیست علاقه مندی ها
-                  </button>
                 </div>
                 <div className={styles.category}>
                   <span>

@@ -132,11 +132,6 @@ function Header() {
           <div className={styles.icons}>
             <ul>
               <li>
-                <Link href="/my-favorites">
-                  <FontAwesomeIcon icon={faHeart} />
-                </Link>
-              </li>
-              <li>
                 <Link href="#" onClick={showSearchbarHandler}>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </Link>
@@ -223,11 +218,6 @@ function Header() {
           <div className={styles.left_header}>
             <div className={styles.icons}>
               <ul>
-                <li>
-                  <Link href="/my-favorites">
-                    <FontAwesomeIcon icon={faHeart} />
-                  </Link>
-                </li>
                 <li>
                   <Link href="#" onClick={showSearchbarHandler}>
                     <FontAwesomeIcon icon={faMagnifyingGlass} />

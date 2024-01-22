@@ -67,20 +67,6 @@
     z-index: -1;
 }
 
-.content .heart {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-}
-
-.content .heart span {
-    display: block;
-    width: 20px;
-    height: 20px;
-    color: #e30000;
-    cursor: pointer;
-}
-
 .content .bottom_cart {
     padding: 15px 0;
 }

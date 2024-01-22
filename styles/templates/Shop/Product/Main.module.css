@@ -81,10 +81,6 @@
     background-color: var(--orange);
 }
 
-.product .info_product .buttons .add_favorites {
-    background-color: #e1003e;
-}
-
 .product .info_product .buttons button:hover {
     opacity: .9;
 }

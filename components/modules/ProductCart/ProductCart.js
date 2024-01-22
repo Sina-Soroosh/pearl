@@ -28,11 +28,6 @@ function ProductCart() {
               <div className={styles.discount}>
                 <span>تخفیف !</span>
               </div>
-              <div className={styles.heart}>
-                <span>
-                  <FontAwesomeIcon icon={faHeartCirclePlus} />
-                </span>
-              </div>
             </div>
             <div className={styles.bottom_cart}>
               <div className={styles.title}>
