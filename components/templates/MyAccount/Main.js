@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/styles/templates/MyAccount/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
+import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 
 function Main() {
   return (
@@ -13,7 +14,9 @@ function Main() {
       <div className={styles.my_account}>
         <div className="container">
           <div className="row">
-            <div className="col-md-3"></div>
+            <div className="col-md-3">
+              <MyAccountMenu />
+            </div>
             <div className="col-md-6"></div>
           </div>
         </div>
