@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/modules/CheckoutForm/CheckoutForm.module.css";
 import { Formik } from "formik";
 
-function CheckoutForm() {
+function CheckoutForm({ isAddress }) {
   const initialValues = {
     firstName: "",
     lastName: "",
@@ -68,7 +68,7 @@ function CheckoutForm() {
       <div className={styles.checkout_form}>
         <div className={styles.content}>
           <div className={styles.title}>
-            <h3>جزییات صورت حساب</h3>
+            <h3>{isAddress ? "آدرس صورتحساب" : "جزییات صورت حساب"}</h3>
           </div>
 
           <Formik initialValues={initialValues} validate={validateHandler}>
@@ -192,18 +192,20 @@ function CheckoutForm() {
                       <span className={styles.err}>{errors.email}</span>
                     )}
                   </div>
-                  <div className={`${styles.input_box}`}>
-                    <label htmlFor="desc">توضیحات سفارش (اختیاری)</label>
-                    <textarea
-                      type="desc"
-                      id="desc"
-                      value={values.desc}
-                      onChange={handleChange}
-                    ></textarea>
-                  </div>
+                  {isAddress || (
+                    <div className={`${styles.input_box}`}>
+                      <label htmlFor="desc">توضیحات سفارش (اختیاری)</label>
+                      <textarea
+                        type="desc"
+                        id="desc"
+                        value={values.desc}
+                        onChange={handleChange}
+                      ></textarea>
+                    </div>
+                  )}
                   <input
                     type="submit"
-                    value="ثبت سفارش"
+                    value={isAddress ? "ذخیره آدرس" : "ثبت سفارش"}
                     className={styles.submit_btn}
                   />
                 </div>
