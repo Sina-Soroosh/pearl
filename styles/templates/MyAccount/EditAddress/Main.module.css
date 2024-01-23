@@ -1,3 +1,13 @@
 .address {
     padding: 100px 0;
 }
+
+.address .content {
+    padding: 10px 20px;
+}
+
+@media screen and (max-width : 992px) {
+    .orders .content {
+        padding: 10px 0px;
+    }
+}
