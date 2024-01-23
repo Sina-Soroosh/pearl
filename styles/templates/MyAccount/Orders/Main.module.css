@@ -1,0 +1,39 @@
+.orders {
+    padding: 100px 0;
+}
+
+.orders .content {
+    padding: 10px 20px;
+}
+
+.orders .content .table table {
+    width: 100%;
+}
+
+.orders .content .table table tr>* {
+    padding: 10px 0;
+}
+
+.orders .content .table table tr {
+    border-bottom: 1px solid #000;
+}
+
+.orders .content .table table thead tr {
+    border-bottom: 2px solid #000;
+}
+
+.orders .content .table table tr td {
+    font-size: 14px;
+}
+
+.orders .content .table table tr td a {
+    color: #000;
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+@media screen and (max-width : 992px) {
+    .orders .content {
+        padding: 10px 0px;
+    }
+}
