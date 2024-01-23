@@ -1,0 +1,50 @@
+.order {
+  padding: 100px 0;
+}
+
+.order .content {
+  padding: 10px 20px;
+}
+
+.order .text {
+  margin-bottom: 10px;
+}
+
+.order .text p {
+  font-size: 15px;
+  color: #aaaaaa;
+}
+
+.order .text p span {
+  font-weight: 700;
+  background-color: var(--gray);
+  color: #000;
+  padding: 0 5px;
+  display: inline-block;
+}
+
+.order .content .table table {
+  width: 100%;
+}
+
+.order .content .table table tr>* {
+  padding: 10px 0;
+}
+
+.order .content .table table tr {
+  border-bottom: 1px solid #000;
+}
+
+.order .content .table table thead tr {
+  border-bottom: 2px solid #000;
+}
+
+.order .content .table table tr td {
+  font-size: 14px;
+}
+
+@media screen and (max-width : 992px) {
+  .order .content {
+    padding: 10px 0px;
+  }
+}
