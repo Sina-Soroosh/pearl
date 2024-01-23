@@ -1,3 +1,32 @@
 .my_account {
     margin: 100px 0;
 }
+
+.my_account .content {
+    padding: 0 10px;
+}
+
+.my_account .content .top p {
+    font-size: 14px;
+    color: #606060;
+    margin-bottom: 10px;
+}
+
+.my_account .content .top p span {
+    font-weight: 700;
+    color: #000;
+}
+
+.my_account .content .top p span.logout,
+.my_account .content .top p a {
+    font-weight: 500;
+    text-decoration: underline;
+    transition: .3s;
+    cursor: pointer;
+    color: #000;
+}
+
+.my_account .content .top p span.logout:hover,
+.my_account .content .top p a:hover {
+    color: var(--orange);
+}

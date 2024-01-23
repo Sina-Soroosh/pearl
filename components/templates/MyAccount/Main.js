@@ -2,6 +2,7 @@ import React from "react";
 import styles from "@/styles/templates/MyAccount/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
+import Link from "next/link";
 
 function Main() {
   return (
@@ -17,7 +18,30 @@ function Main() {
             <div className="col-md-3">
               <MyAccountMenu />
             </div>
-            <div className="col-md-6"></div>
+            <div className="col-md-9">
+              <div className={styles.content}>
+                <div className={styles.top}>
+                  <p>
+                    سلام <span>SinaSoroosh</span> (<span>SinaSoroosh</span>{" "}
+                    نیستید؟ <span className={styles.logout}>خارج شوید</span>)
+                  </p>
+
+                  <p>
+                    از طریق پیشخوان حساب کاربری‌تان، می‌توانید{" "}
+                    <Link href="/my-account/orders">سفارش‌های اخیرتان</Link> را
+                    مشاهده،{" "}
+                    <Link href="/my-account/edit-address">
+                      آدرس‌های حمل و نقل و صورتحساب‌تان را مدیریت
+                    </Link>{" "}
+                    و{" "}
+                    <Link href="/my-account/edit-account">
+                      جزییات حساب کاربری و کلمه عبور خود را ویرایش کنید
+                    </Link>
+                    .
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
