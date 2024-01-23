@@ -1,0 +1,13 @@
+.account {
+    padding: 100px;
+}
+
+.account .content {
+    padding: 10px 20px;
+}
+
+@media screen and (max-width : 992px) {
+    .account .content {
+        padding: 10px 0px;
+    }
+}
