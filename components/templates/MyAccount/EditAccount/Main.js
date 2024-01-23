@@ -2,6 +2,7 @@ import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 import React from "react";
 import styles from "@/styles/templates/MyAccount/EditAccount/Main.module.css";
+import EditAccountForm from "@/components/modules/UserPanel/EditAccountForm/EditAccountForm";
 
 function Main() {
   return (
@@ -25,7 +26,9 @@ function Main() {
               <MyAccountMenu />
             </div>
             <div className="col-md-9">
-              <div className={styles.content}></div>
+              <div className={styles.content}>
+                <EditAccountForm />
+              </div>
             </div>
           </div>
         </div>
