@@ -3,6 +3,7 @@ import styles from "@/styles/templates/MyAccount/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 import Link from "next/link";
+import IndexBox from "@/components/modules/UserPanel/IndexBox/IndexBox";
 
 function Main() {
   return (
@@ -39,6 +40,38 @@ function Main() {
                     </Link>
                     .
                   </p>
+                </div>
+                <div className={styles.main}>
+                  <div className="row">
+                    <div className="col-md-6 col-lg-4">
+                      <IndexBox
+                        title="پیشخوان"
+                        href="/my-account"
+                        icon="faGauge"
+                      />
+                    </div>
+                    <div className="col-md-6 col-lg-4">
+                      <IndexBox
+                        title="سفارش ها"
+                        href="/my-account/orders"
+                        icon="faBasketShopping"
+                      />
+                    </div>
+                    <div className="col-md-6 col-lg-4">
+                      <IndexBox
+                        title="آدرس"
+                        href="/my-account/edit-address"
+                        icon="faHome"
+                      />
+                    </div>
+                    <div className="col-md-6 col-lg-4">
+                      <IndexBox
+                        title="جزییات حساب"
+                        href="/my-account/edit-account"
+                        icon="faUser"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

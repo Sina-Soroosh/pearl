@@ -1,0 +1,36 @@
+.box {
+    padding: 20px;
+    border: 1px solid var(--gray);
+    margin: 20px 5px;
+    transition: .3s;
+    background-color: #fff;
+}
+
+.box:hover {
+    box-shadow: 7px 7px 30px 0.3px rgba(0, 0, 0, 0.1);
+}
+
+.box .content {
+    text-align: center;
+}
+
+.box .content .icon {
+    width: 50px;
+    margin: auto;
+    transition: .3s;
+}
+
+.box:hover .content .icon {
+    color: var(--orange);
+}
+
+.box .content .title {
+    margin: 10px 0;
+}
+
+.box .content .title h2 a {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 5px 0 10px 0;
+    color: #000;
+}
