@@ -6,4 +6,10 @@ const hashedPasswordHandler = (password) => {
   return hashedPassword;
 };
 
-export { hashedPasswordHandler };
+const comparedPasswordHandler = (password, hashedPassword) => {
+  const isValidPassword = bcrypt.compareSync(password, hashedPassword);
+
+  return isValidPassword;
+};
+
+export { hashedPasswordHandler, comparedPasswordHandler };
