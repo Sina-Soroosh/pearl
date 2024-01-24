@@ -1,3 +1,4 @@
+import { sign } from "jsonwebtoken";
 const bcrypt = require("bcryptjs");
 
 const hashedPasswordHandler = (password) => {
@@ -12,4 +13,10 @@ const comparedPasswordHandler = (password, hashedPassword) => {
   return isValidPassword;
 };
 
-export { hashedPasswordHandler, comparedPasswordHandler };
+const generateToken = (data) => {
+  const token = sign({ ...data }, process.env.privateKey);
+
+  return token;
+};
+
+export { hashedPasswordHandler, comparedPasswordHandler, generateToken };
