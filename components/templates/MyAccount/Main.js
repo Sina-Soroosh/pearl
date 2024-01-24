@@ -4,8 +4,36 @@ import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 import Link from "next/link";
 import IndexBox from "@/components/modules/UserPanel/IndexBox/IndexBox";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import useSWRImmutable from "swr/immutable";
 
-function Main() {
+function Main({ user }) {
+  const router = useRouter();
+  const swal = withReactContent(Swal);
+
+  const logoutHandler = async (e) => {
+    swal
+      .fire({
+        title: "آیا مطمئنید که میخواهید از حساب کاربری خود خارج شوید؟",
+        icon: "question",
+        confirmButtonText: "بله",
+        cancelButtonText: "نه",
+        showCancelButton: true,
+        confirmButtonColor: "rgb(69 71 76)",
+        cancelButtonColor: "var(--orange)",
+        focusCancel: true,
+      })
+      .then((res) => {
+        if (res.isConfirmed) {
+          fetch("/api/auth/logout").then(() => {
+            router.replace("/login");
+          });
+        }
+      });
+  };
+
   return (
     <>
       <Breadcrumb
@@ -23,8 +51,12 @@ function Main() {
               <div className={styles.content}>
                 <div className={styles.top}>
                   <p>
-                    سلام <span>SinaSoroosh</span> (<span>SinaSoroosh</span>{" "}
-                    نیستید؟ <span className={styles.logout}>خارج شوید</span>)
+                    سلام <span>{user.username}</span> (
+                    <span>{user.username}</span> نیستید؟{" "}
+                    <span className={styles.logout} onClick={logoutHandler}>
+                      خارج شوید
+                    </span>
+                    )
                   </p>
 
                   <p>
