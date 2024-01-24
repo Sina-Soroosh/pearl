@@ -1,10 +1,9 @@
 import { connectToDB } from "@/config/db";
 import userModel from "@/models/user";
 import { comparedPasswordHandler, generateToken } from "@/utils/auth";
-import userCheck from "@/validators/user";
 import { serialize } from "cookie";
 
-const register = async (req, res) => {
+const login = async (req, res) => {
   connectToDB();
 
   try {
@@ -50,4 +49,4 @@ const register = async (req, res) => {
   }
 };
 
-export default register;
+export default login;
