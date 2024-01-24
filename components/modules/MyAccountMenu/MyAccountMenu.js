@@ -10,9 +10,35 @@ import {
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function MyAccountMenu() {
-  const { asPath } = useRouter();
+  const { asPath, replace } = useRouter();
+  const swal = withReactContent(Swal);
+
+  const logoutHandler = async (e) => {
+    e.preventDefault();
+
+    swal
+      .fire({
+        title: "آیا مطمئنید که میخواهید از حساب کاربری خود خارج شوید؟",
+        icon: "question",
+        confirmButtonText: "بله",
+        cancelButtonText: "نه",
+        showCancelButton: true,
+        confirmButtonColor: "rgb(69 71 76)",
+        cancelButtonColor: "var(--orange)",
+        focusCancel: true,
+      })
+      .then((res) => {
+        if (res.isConfirmed) {
+          fetch("/api/auth/logout").then(() => {
+            replace("/login");
+          });
+        }
+      });
+  };
 
   return (
     <>
@@ -67,7 +93,7 @@ function MyAccountMenu() {
             </Link>
           </li>
           <li>
-            <Link href="#">
+            <Link href="#" onClick={logoutHandler}>
               <span>
                 <FontAwesomeIcon icon={faArrowRightFromBracket} />
               </span>

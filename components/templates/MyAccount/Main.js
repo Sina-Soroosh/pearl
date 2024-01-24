@@ -7,7 +7,6 @@ import IndexBox from "@/components/modules/UserPanel/IndexBox/IndexBox";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import useSWRImmutable from "swr/immutable";
 
 function Main({ user }) {
   const router = useRouter();
