@@ -147,7 +147,7 @@ function Header() {
             {data?.isAdmin && (
               <li>
                 <Link href="/p-admin">
-                  <span>تماس با ما</span>
+                  <span>پنل مدیریت</span>
                 </Link>
               </li>
             )}
@@ -241,7 +241,7 @@ function Header() {
                 {data?.isAdmin && (
                   <li>
                     <Link href="/p-admin">
-                      <span>تماس با ما</span>
+                      <span>پنل مدیریت</span>
                     </Link>
                   </li>
                 )}

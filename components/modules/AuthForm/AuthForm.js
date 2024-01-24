@@ -3,7 +3,7 @@ import styles from "@/styles/modules/AuthForm/AuthForm.module.css";
 import { Formik } from "formik";
 import Link from "next/link";
 
-function AuthForm({ isLoginForm }) {
+function AuthForm({ isLoginForm, onSubmit }) {
   const initialValues = {
     identifier: "",
     email: "",
@@ -48,7 +48,11 @@ function AuthForm({ isLoginForm }) {
         <div className={styles.title}>
           <h2>{isLoginForm ? "ورود" : "ثبت نام"}</h2>
         </div>
-        <Formik initialValues={initialValues} validate={validateHandler}>
+        <Formik
+          initialValues={initialValues}
+          validate={validateHandler}
+          onSubmit={onSubmit}
+        >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <div className="row">

@@ -8,7 +8,7 @@ const login = async (req, res) => {
 
   try {
     switch (req.method) {
-      case "GET":
+      case "PUT":
         const { identifier, password } = req.body;
 
         const user = await userModel.findOne({
