@@ -13,12 +13,30 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/router";
+import useSWR from "swr";
+
+const fetcher = async () => {
+  const res = await fetch("/api/auth/me");
+
+  if (res.status !== 200) {
+    return { isLogin: false };
+  }
+
+  const user = await res.json();
+
+  if (user.role === "ADMIN") {
+    return { isLogin: true, isAdmin: true };
+  }
+
+  return { isLogin: true };
+};
 
 function Header() {
   const [isShowMenu, setIsShowMenu] = useState(false);
   const [isShowSearchBar, setIsShowSearchBar] = useState(false);
   const router = useRouter();
   const keySearchInputRef = useRef();
+  const { data } = useSWR("GetMeHeader", fetcher);
 
   const hideMenuHandler = () => {
     setIsShowMenu(false);
@@ -126,6 +144,13 @@ function Header() {
                 <span>تماس با ما</span>
               </Link>
             </li>
+            {data?.isAdmin && (
+              <li>
+                <Link href="/p-admin">
+                  <span>تماس با ما</span>
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
         <div className={styles.bottom_menu_mobile}>
@@ -137,7 +162,7 @@ function Header() {
                 </Link>
               </li>
               <li>
-                <Link href="/my-favorites">
+                <Link href={data?.isLogin ? "/my-account" : "/login"}>
                   <FontAwesomeIcon icon={faUser} />
                 </Link>
               </li>
@@ -212,6 +237,14 @@ function Header() {
                     <span>تماس با ما</span>
                   </Link>
                 </li>
+
+                {data?.isAdmin && (
+                  <li>
+                    <Link href="/p-admin">
+                      <span>تماس با ما</span>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -224,7 +257,7 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/my-favorites">
+                  <Link href={data?.isLogin ? "/my-account" : "/login"}>
                     <FontAwesomeIcon icon={faUser} />
                   </Link>
                 </li>
