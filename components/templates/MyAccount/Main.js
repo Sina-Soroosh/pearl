@@ -7,10 +7,12 @@ import IndexBox from "@/components/modules/UserPanel/IndexBox/IndexBox";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useSWRConfig } from "swr";
 
 function Main({ user }) {
   const router = useRouter();
   const swal = withReactContent(Swal);
+  const { mutate } = useSWRConfig();
 
   const logoutHandler = async (e) => {
     swal
@@ -27,6 +29,7 @@ function Main({ user }) {
       .then((res) => {
         if (res.isConfirmed) {
           fetch("/api/auth/logout").then(() => {
+            mutate("GetMeHeader");
             router.replace("/login");
           });
         }

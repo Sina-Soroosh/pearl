@@ -12,10 +12,12 @@ import {
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { useSWRConfig } from "swr";
 
 function MyAccountMenu() {
   const { asPath, replace } = useRouter();
   const swal = withReactContent(Swal);
+  const { mutate } = useSWRConfig();
 
   const logoutHandler = async (e) => {
     e.preventDefault();
@@ -34,6 +36,7 @@ function MyAccountMenu() {
       .then((res) => {
         if (res.isConfirmed) {
           fetch("/api/auth/logout").then(() => {
+            mutate("GetMeHeader");
             replace("/login");
           });
         }

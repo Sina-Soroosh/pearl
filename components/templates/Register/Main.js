@@ -5,7 +5,7 @@ import AuthForm from "@/components/modules/AuthForm/AuthForm";
 import { useRouter } from "next/router";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
-import useSWR from "swr";
+import useSWR, { useSWRConfig } from "swr";
 
 const fetcher = async () => {
   const res = await fetch("/api/auth/me");
@@ -21,6 +21,7 @@ function Main() {
   const router = useRouter();
   const { data } = useSWR("GetMeLogin", fetcher);
   const swal = withReactContent(Swal);
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     if (data) {
@@ -63,6 +64,7 @@ function Main() {
           confirmButtonText: "رفتن به حساب کاربری",
         })
         .then(() => {
+          mutate("GetMeHeader");
           router.replace("/my-account");
         });
     }
