@@ -4,7 +4,7 @@ import React from "react";
 import styles from "@/styles/templates/MyAccount/EditAccount/Main.module.css";
 import EditAccountForm from "@/components/modules/UserPanel/EditAccountForm/EditAccountForm";
 
-function Main() {
+function Main({ user }) {
   return (
     <>
       <Breadcrumb
@@ -27,7 +27,7 @@ function Main() {
             </div>
             <div className="col-md-9">
               <div className={styles.content}>
-                <EditAccountForm />
+                <EditAccountForm email={user.email} username={user.username} />
               </div>
             </div>
           </div>

@@ -2,10 +2,10 @@ import React from "react";
 import styles from "@/styles/modules/UserPanel/EditAccountForm/EditAccountForm.module.css";
 import { Formik } from "formik";
 
-function EditAccountForm() {
+function EditAccountForm({ email, username }) {
   const initialValues = {
-    email: "",
-    username: "",
+    email,
+    username,
     password: "",
   };
 
