@@ -12,7 +12,7 @@ const users = async (req, res) => {
     const user = await getMe(req.cookies);
 
     switch (req.method) {
-      case "GET":
+      case "GET": {
         if (user === false || user.role !== "ADMIN") {
           return res
             .status(403)
@@ -27,8 +27,8 @@ const users = async (req, res) => {
         );
 
         return res.json(users);
-
-      case "PUT":
+      }
+      case "PUT": {
         if (user === false) {
           return res.status(401).json({ message: "You are unauthorize !!" });
         }
@@ -79,6 +79,42 @@ const users = async (req, res) => {
         return res
           .setHeader("Set-Cookie", cookie)
           .json({ message: "Update user successfully :))" });
+      }
+      case "POST": {
+        if (user === false || user.role !== "ADMIN") {
+          return res
+            .status(403)
+            .json({ message: "You don't access to data !!" });
+        }
+
+        const { username, email, password, role = "USER" } = req.body;
+
+        const userInfo = { username, email, password, role };
+
+        const isValidUserInfo = userCheck(userInfo);
+
+        if (isValidUserInfo !== true) {
+          return res.status(400).json({ message: "Parameters is not valid" });
+        }
+
+        const isUserExist = await userModel.findOne({
+          $or: [{ email }, { username }],
+        });
+
+        if (isUserExist) {
+          return res.status(422).json({
+            message: "There is a user with this username or email",
+          });
+        }
+
+        const hashedPassword = await hashedPasswordHandler(password);
+
+        userInfo.password = hashedPassword;
+
+        await userModel.create(userInfo);
+
+        return res.status(201).json({ message: "Create user successfully :)" });
+      }
       default:
         return res.status(405).json({ message: "The method is not valid" });
     }
