@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/modules/UserPanel/EditAccountForm/EditAccountForm.module.css";
 import { Formik } from "formik";
 
-function EditAccountForm({ email, username }) {
+function EditAccountForm({ email, username, onSubmit }) {
   const initialValues = {
     email,
     username,
@@ -24,9 +24,6 @@ function EditAccountForm({ email, username }) {
     } else if (!emailRegex.test(values.email)) {
       errors.email = "لطفا ایمیل خود را درست وارد کنید";
     }
-    if (!values.identifier) {
-      errors.identifier = "نام کاربری یا ایمیل خود را وارد کنید";
-    }
 
     if (values.password && values.password.length < 8) {
       errors.password = "رمز عبور باید حداقل 8 کارکتر باشد";
@@ -41,7 +38,11 @@ function EditAccountForm({ email, username }) {
         <div className={styles.title}>
           <h2>جزییات حساب کاربری</h2>
         </div>
-        <Formik initialValues={initialValues} validate={validateHandler}>
+        <Formik
+          initialValues={initialValues}
+          validate={validateHandler}
+          onSubmit={onSubmit}
+        >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <div className="row">
