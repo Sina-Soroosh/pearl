@@ -13,24 +13,30 @@ const users = async (req, res) => {
       return res.status(403).json({ message: "You don't access to data !!" });
     }
 
+    const { identifier } = req.query;
+
+    const userMain = await userModel.findOne({
+      $or: [{ email: identifier }, { username: identifier }],
+    });
+
+    if (!userMain) {
+      return res.status(404).json({ message: "Notfound user !!" });
+    }
+
     switch (req.method) {
       case "GET": {
-        const { identifier } = req.query;
-
-        const userMain = await userModel.findOne(
-          {
-            $or: [{ email: identifier }, { username: identifier }],
-          },
-          "-password"
-        );
-
-        if (!userMain) {
-          return res.status(404).json({ message: "Notfound user !!" });
-        }
-
         return res.json(userMain);
       }
       case "DELETE": {
+        if (String(user._id) === String(userMain._id)) {
+          return res.status(400).json({
+            message: "You can't remove yourself !!",
+          });
+        }
+
+        await userModel.findOneAndDelete({ _id: userMain._id });
+
+        return res.json({ message: "Remove user successfully :))" });
       }
       case "PUT": {
       }
