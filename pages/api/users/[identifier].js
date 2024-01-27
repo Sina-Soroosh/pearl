@@ -1,4 +1,5 @@
 import { connectToDB } from "@/config/db";
+import addressModel from "@/models/address";
 import userModel from "@/models/user";
 import { hashedPasswordHandler } from "@/utils/auth";
 import { getMe } from "@/utils/myAccount";
@@ -36,6 +37,8 @@ const users = async (req, res) => {
         }
 
         await userModel.findOneAndDelete({ _id: userMain._id });
+
+        await addressModel.findOneAndDelete({ user: userMain._id });
 
         return res.json({ message: "Remove user successfully :))" });
       }
@@ -80,7 +83,9 @@ const users = async (req, res) => {
         return res.status(405).json({ message: "The method is not valid" });
     }
   } catch (error) {
-    return res.status(500).res({ message: "Unknown internal server error !!" });
+    return res
+      .status(500)
+      .json({ message: "Unknown internal server error !!" });
   }
 };
 

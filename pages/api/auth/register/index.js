@@ -1,4 +1,5 @@
 import { connectToDB } from "@/config/db";
+import addressModel from "@/models/address";
 import userModel from "@/models/user";
 import { generateToken, hashedPasswordHandler } from "@/utils/auth";
 import userCheck from "@/validators/user";
@@ -41,7 +42,11 @@ const register = async (req, res) => {
 
         userInfo.password = hashedPassword;
 
-        await userModel.create(userInfo);
+        const user = await userModel.create(userInfo);
+
+        await addressModel.create({
+          user: user._id,
+        });
 
         const token = generateToken({ email });
 
@@ -59,7 +64,9 @@ const register = async (req, res) => {
         return res.status(405).json({ message: "The method is not valid" });
     }
   } catch (error) {
-    return res.status(500).res({ message: "Unknown internal server error !!" });
+    return res
+      .status(500)
+      .json({ message: "Unknown internal server error !!" });
   }
 };
 
