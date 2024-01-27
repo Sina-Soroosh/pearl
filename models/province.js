@@ -1,3 +1,5 @@
+import cityModel from "./city";
+
 const { default: mongoose } = require("mongoose");
 
 const provinceSchema = mongoose.Schema({
@@ -13,6 +15,12 @@ const provinceSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+});
+
+provinceSchema.virtual("cities", {
+  ref: "city",
+  localField: "id",
+  foreignField: "province_id",
 });
 
 const provinceModel =
