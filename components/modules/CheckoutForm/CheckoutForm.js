@@ -2,26 +2,34 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/modules/CheckoutForm/CheckoutForm.module.css";
 import { Formik } from "formik";
 
-function CheckoutForm({ isAddress }) {
+function CheckoutForm({ isAddress, onSubmit, ...address }) {
   const [provinces, setProvinces] = useState([]);
   const [cities, setCities] = useState([]);
   const provincesRef = useRef();
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    province: "",
-    city: "",
-    address: "",
-    postalCode: "",
-    phone: "",
-    email: "",
-    desc: "",
+    firstName: address.firstName || "",
+    lastName: address.lastName || "",
+    province: address.province || "",
+    city: address.city || "",
+    address: address.address || "",
+    postalCode: address.postalCode || "",
+    phone: address.phone || "",
+    email: address.email || "",
+    desc: address.desc || "",
   };
 
   useEffect(() => {
     const getProvinces = async () => {
       const res = await fetch("/api/cities");
       const data = await res.json();
+
+      if (address.province) {
+        const provinceMain = data.find(
+          (province) => province.name === address.province
+        );
+
+        setCities(provinceMain.cities);
+      }
 
       setProvinces(data);
     };
@@ -105,7 +113,11 @@ function CheckoutForm({ isAddress }) {
             <h3>{isAddress ? "آدرس صورتحساب" : "جزییات صورت حساب"}</h3>
           </div>
 
-          <Formik initialValues={initialValues} validate={validateHandler}>
+          <Formik
+            initialValues={initialValues}
+            validate={validateHandler}
+            onSubmit={onSubmit}
+          >
             {({ values, errors, touched, handleChange, handleSubmit }) => (
               <form onSubmit={handleSubmit}>
                 <div className="row">
