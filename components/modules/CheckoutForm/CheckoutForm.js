@@ -1,18 +1,46 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "@/styles/modules/CheckoutForm/CheckoutForm.module.css";
 import { Formik } from "formik";
 
 function CheckoutForm({ isAddress }) {
+  const [provinces, setProvinces] = useState([]);
+  const [cities, setCities] = useState([]);
+  const provincesRef = useRef();
   const initialValues = {
     firstName: "",
     lastName: "",
-    province: "تهران",
+    province: "",
     city: "",
     address: "",
     postalCode: "",
     phone: "",
     email: "",
     desc: "",
+  };
+
+  useEffect(() => {
+    const getProvinces = async () => {
+      const res = await fetch("/api/cities");
+      const data = await res.json();
+
+      setProvinces(data);
+    };
+
+    getProvinces();
+  }, []);
+
+  const onChangeProvince = (e, handleChange) => {
+    if (e.target.value === "") {
+      setCities([]);
+    } else {
+      const provinceMain = provinces.find(
+        (province) => province.name === e.target.value
+      );
+
+      setCities(provinceMain.cities);
+    }
+
+    handleChange(e);
   };
 
   const validateHandler = (values) => {
@@ -32,8 +60,14 @@ function CheckoutForm({ isAddress }) {
       errors.lastName = "نام خانوادگی خود را به درستی وارد کنید";
     }
 
-    if (!values.city) {
+    const isHasCity = cities.some((city) => city.name === values.city);
+
+    if (!values.city || !isHasCity) {
       errors.city = "لطفا شهر محل زندگی خود را انتخاب کنید";
+    }
+
+    if (!values.province) {
+      errors.province = "لطفا استان محل زندگی خود را انتخاب کنید";
     }
 
     if (!values.address) {
@@ -110,12 +144,19 @@ function CheckoutForm({ isAddress }) {
                     <select
                       id="province"
                       value={values.province}
-                      onChange={handleChange}
+                      onChange={(e) => onChangeProvince(e, handleChange)}
                     >
-                      <option value="تهران">تهران</option>
-                      <option value="فارس">فارس</option>
-                      <option value="اصفهان">اصفهان</option>
+                      <option value="">استان خود را انتخاب کنید</option>
+                      {provinces.map((province) => (
+                        <option value={province.name} key={province.id}>
+                          {province.name}
+                        </option>
+                      ))}
                     </select>
+
+                    {touched.province && (
+                      <span className={styles.err}>{errors.province}</span>
+                    )}
                   </div>
                   <div className={`${styles.input_box}`}>
                     <label htmlFor="city">
@@ -127,9 +168,11 @@ function CheckoutForm({ isAddress }) {
                       onChange={handleChange}
                     >
                       <option value="">شهر خود را انتخاب کنید</option>
-                      <option value="تهران">تهران</option>
-                      <option value="شیراز">شیراز</option>
-                      <option value="اصفهان">اصفهان</option>
+                      {cities.map((city) => (
+                        <option value={city.name} key={city.id}>
+                          {city.name}
+                        </option>
+                      ))}
                     </select>
 
                     {touched.city && (
