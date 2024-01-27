@@ -1,5 +1,6 @@
 import { connectToDB } from "@/config/db";
 import userModel from "@/models/user";
+import { hashedPasswordHandler } from "@/utils/auth";
 import { getMe } from "@/utils/myAccount";
 import userCheck from "@/validators/user";
 
@@ -39,6 +40,41 @@ const users = async (req, res) => {
         return res.json({ message: "Remove user successfully :))" });
       }
       case "PUT": {
+        const {
+          username = userMain.username,
+          email = userMain.email,
+          password = userMain.password,
+          role = userMain.role,
+        } = req.body;
+
+        const userInfo = { username, email, password, role };
+
+        const isValidUserInfo = userCheck(userInfo);
+
+        if (isValidUserInfo !== true) {
+          return res.status(400).json({ message: "Parameters is not valid" });
+        }
+
+        const isUserExist = await userModel.findOne({
+          $or: [{ username }, { email }],
+          $nor: [{ _id: userMain._id }],
+        });
+
+        if (isUserExist) {
+          return res.status(422).json({
+            message: "There is a user with this username or email",
+          });
+        }
+
+        if (userMain.password !== password) {
+          const hashedPassword = await hashedPasswordHandler(password);
+
+          userInfo.password = hashedPassword;
+        }
+
+        await userModel.findOneAndUpdate({ _id: userMain._id }, userInfo);
+
+        return res.json({ message: "Update user successfully :))" });
       }
       default:
         return res.status(405).json({ message: "The method is not valid" });
