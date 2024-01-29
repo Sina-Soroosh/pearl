@@ -1,15 +1,15 @@
 import { connectToDB } from "@/config/db";
-import provinceModel from "@/models/province";
+import categoryModel from "@/models/category";
 
-const cities = async (req, res) => {
+const categories = async (req, res) => {
   connectToDB();
 
   try {
     switch (req.method) {
       case "GET": {
-        const cities = await provinceModel.find().populate("cities").lean();
+        const categoriesData = await categoryModel.find();
 
-        return res.json(cities);
+        return res.json(categoriesData);
       }
       default:
         return res.status(405).json({ message: "The method is not valid" });
@@ -21,4 +21,4 @@ const cities = async (req, res) => {
   }
 };
 
-export default cities;
+export default categories;
