@@ -15,11 +15,49 @@ const category = async (req, res) => {
       return res.status(404).json({ message: "Notfound category !!" });
     }
 
+    const user = await getMe(req.cookies);
+
     switch (req.method) {
       case "GET": {
         return res.json(mainCategory);
       }
-      case "POST": {
+      case "PUT": {
+        if (user === false || user.role !== "ADMIN") {
+          return res
+            .status(403)
+            .json({ message: "You don't access to data !!" });
+        }
+
+        const {
+          title = mainCategory.title,
+          shortName = mainCategory.shortName,
+        } = req.body;
+
+        const categoryInfo = { title, shortName };
+
+        const isValidCategoryInfo = categoryCheck(categoryInfo);
+
+        if (isValidCategoryInfo !== true) {
+          return res.status(400).json({ message: "Parameters is not valid" });
+        }
+
+        const isCategoryExist = await categoryModel.findOne({
+          $nor: [{ _id: mainCategory._id }],
+          shortName,
+        });
+
+        if (isCategoryExist) {
+          return res.status(422).json({
+            message: "There is a category with this shortName",
+          });
+        }
+
+        await categoryModel.findOneAndUpdate(
+          { _id: mainCategory._id },
+          categoryInfo
+        );
+
+        return res.json({ message: "Update category successfully :))" });
       }
       default:
         return res.status(405).json({ message: "The method is not valid" });
