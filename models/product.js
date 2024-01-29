@@ -1,3 +1,5 @@
+import categoryModel from "./category";
+
 const { default: mongoose } = require("mongoose");
 
 const productSchema = mongoose.Schema(
