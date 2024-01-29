@@ -59,6 +59,17 @@ const category = async (req, res) => {
 
         return res.json({ message: "Update category successfully :))" });
       }
+      case "DELETE": {
+        if (user === false || user.role !== "ADMIN") {
+          return res
+            .status(403)
+            .json({ message: "You don't access to data !!" });
+        }
+
+        await categoryModel.findOneAndDelete({ _id: mainCategory._id });
+
+        return res.json({ message: "Remove category successfully :))" });
+      }
       default:
         return res.status(405).json({ message: "The method is not valid" });
     }
