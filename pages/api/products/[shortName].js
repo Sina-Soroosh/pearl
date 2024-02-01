@@ -94,6 +94,17 @@ const product = async (req, res) => {
 
         return res.json({ message: "Update product successfully :))" });
       }
+      case "DELETE": {
+        if (user === false || user.role !== "ADMIN") {
+          return res
+            .status(403)
+            .json({ message: "You don't access to data !!" });
+        }
+
+        await productModel.findOneAndDelete({ _id: product._id });
+
+        return res.json({ message: "Remove product successfully :))" });
+      }
       default:
         return res.status(405).json({ message: "The method is not valid" });
     }
