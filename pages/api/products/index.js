@@ -35,18 +35,24 @@ const products = async (req, res) => {
         const form = formidable();
 
         form.parse(req, async function (err, fields, files) {
-          const productInfo = {
-            image: "",
-            title: fields.title[0],
-            shortName: fields.shortName[0],
-            desc: fields.desc[0],
-            price: +fields.price[0],
-            discount: +fields.discount[0],
-            isAvailable: Boolean(fields.isAvailable[0]),
-            category: fields.category[0],
-            infos: JSON.parse(fields.infos[0]),
-            rating: 5,
-          };
+          let productInfo = {};
+
+          try {
+            productInfo = {
+              image: "",
+              title: fields.title[0],
+              shortName: fields.shortName[0],
+              desc: fields.desc[0],
+              price: +fields.price[0],
+              discount: +fields.discount[0],
+              isAvailable: Boolean(fields.isAvailable[0]),
+              category: fields.category[0],
+              infos: JSON.parse(fields.infos[0]),
+              rating: 5,
+            };
+          } catch (error) {
+            return res.status(400).json({ message: "Parameters is not valid" });
+          }
 
           if (!isValidObjectId(productInfo.category)) {
             return res.status(400).json({ message: "category id is invalid" });
