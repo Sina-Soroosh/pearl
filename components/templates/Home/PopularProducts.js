@@ -3,7 +3,7 @@ import styles from "@/styles/templates/Home/PopularProducts.module.css";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
 import Link from "next/link";
 
-function PopularProducts() {
+function PopularProducts({ products }) {
   return (
     <>
       <div className={styles.popular_products}>
@@ -19,14 +19,9 @@ function PopularProducts() {
               </p>
             </div>
             <div className="row">
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
-              <ProductCart />
+              {products.map((product) => (
+                <ProductCart {...product} key={product._id} />
+              ))}
             </div>
 
             <div className={styles.products_link}>
