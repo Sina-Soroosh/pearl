@@ -1,7 +1,10 @@
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
+import commentModel from "@/models/comment";
 import { getMe } from "@/utils/myAccount";
 import categoryCheck from "@/validators/category";
+import comments from "../comments";
+import productModel from "@/models/product";
 
 const category = async (req, res) => {
   connectToDB();
@@ -9,7 +12,10 @@ const category = async (req, res) => {
   try {
     const { shortName } = req.query;
 
-    const mainCategory = await categoryModel.findOne({ shortName });
+    const mainCategory = await categoryModel
+      .findOne({ shortName })
+      .populate("products")
+      .lean();
 
     if (!mainCategory) {
       return res.status(404).json({ message: "Notfound category !!" });
@@ -65,6 +71,12 @@ const category = async (req, res) => {
             .status(403)
             .json({ message: "You don't access to data !!" });
         }
+
+        await mainCategory.products.forEach(async (product) => {
+          await commentModel.deleteMany({ product: product._id });
+        });
+
+        await productModel.deleteMany({ category: mainCategory._id });
 
         await categoryModel.findOneAndDelete({ _id: mainCategory._id });
 

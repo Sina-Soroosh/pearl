@@ -1,5 +1,6 @@
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
+import commentModel from "@/models/comment";
 import productModel from "@/models/product";
 import { getMe } from "@/utils/myAccount";
 import productCheck from "@/validators/product";
@@ -23,7 +24,16 @@ const product = async (req, res) => {
       case "GET": {
         const product = await productModel
           .findOne({ shortName })
-          .populate([{ path: "category" }]);
+          .populate([
+            { path: "category" },
+            {
+              path: "comments",
+              populate: [{ path: "creator", select: "username email" }],
+            },
+          ])
+          .lean();
+
+        product.comments = product.comments.filter((comment) => comment.isShow);
 
         return res.json(product);
       }
@@ -100,6 +110,8 @@ const product = async (req, res) => {
             .status(403)
             .json({ message: "You don't access to data !!" });
         }
+
+        await commentModel.deleteMany({ product: product._id });
 
         await productModel.findOneAndDelete({ _id: product._id });
 

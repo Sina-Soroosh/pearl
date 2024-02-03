@@ -1,3 +1,5 @@
+import productModel from "./product";
+
 const { default: mongoose } = require("mongoose");
 
 const categorySchema = mongoose.Schema(
@@ -17,6 +19,12 @@ const categorySchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
+categorySchema.virtual("products", {
+  ref: "product",
+  localField: "_id",
+  foreignField: "category",
+});
 
 const categoryModel =
   mongoose.models.category || mongoose.model("category", categorySchema);
