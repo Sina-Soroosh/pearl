@@ -18,7 +18,10 @@ const comments = async (req, res) => {
             .json({ message: "You don't access to data !!" });
         }
 
-        const commentsData = await commentModel.find();
+        const commentsData = await commentModel.find().populate([
+          { path: "product", select: "shortName title" },
+          { path: "creator", select: "username email" },
+        ]);
 
         return res.json(commentsData);
       }
