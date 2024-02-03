@@ -37,6 +37,34 @@ const comment = async (req, res) => {
 
         return res.json(commentMain);
       }
+      case "DELETE": {
+        await commentModel.findOneAndDelete({ _id: commentID });
+
+        const product = await productModel
+          .findOne({ _id: comment.product })
+          .populate("comments")
+          .lean();
+
+        const sumRating = product.comments.reduce(
+          (prev, next) => {
+            if (next.isShow) {
+              return { sum: prev.sum + next.star, length: 1 + prev.length };
+            }
+
+            return prev;
+          },
+          { sum: 0, length: 0 }
+        );
+
+        const newRating = Math.round(sumRating.sum / sumRating.length);
+
+        await productModel.findOneAndUpdate(
+          { _id: comment.product },
+          { rating: newRating }
+        );
+
+        return res.json({ message: "Remove comment successfully :))" });
+      }
       default:
         return res.status(405).json({ message: "The method is not valid" });
     }
