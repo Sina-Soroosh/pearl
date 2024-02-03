@@ -1,4 +1,5 @@
 import categoryModel from "./category";
+import commentModel from "./comment";
 
 const { default: mongoose } = require("mongoose");
 
@@ -68,6 +69,12 @@ const productSchema = mongoose.Schema(
   },
   { timestamps: true }
 );
+
+productSchema.virtual("comments", {
+  ref: "comment",
+  localField: "_id",
+  foreignField: "product",
+});
 
 const productModel =
   mongoose.models.product || mongoose.model("product", productSchema);
