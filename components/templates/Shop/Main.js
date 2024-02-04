@@ -6,7 +6,7 @@ import OrderBy from "@/components/modules/OrderBy/OrderBy";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
 import Pagination from "@/components/modules/Pagination/Pagination";
 
-function Main() {
+function Main({ products, minPrice, maxPrice, lastPage, categories }) {
   return (
     <>
       <Breadcrumb
@@ -17,7 +17,11 @@ function Main() {
       <div className={styles.content}>
         <div className={styles.top_content}>
           <div className={styles.filter}>
-            <FilterProducts />
+            <FilterProducts
+              min={minPrice}
+              max={maxPrice}
+              categories={categories}
+            />
           </div>
           <div className={styles.order}>
             <OrderBy />
@@ -25,21 +29,12 @@ function Main() {
         </div>
         <div className={styles.main_content}>
           <div className="row">
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
+            {products.map((product) => (
+              <ProductCart {...product} key={product._id} />
+            ))}
           </div>
         </div>
-        <Pagination lastPage={3} />
+        <Pagination lastPage={lastPage} />
       </div>
     </>
   );

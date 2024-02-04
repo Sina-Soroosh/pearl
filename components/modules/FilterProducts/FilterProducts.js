@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Slider } from "@mui/material";
 import { useRouter } from "next/router";
 
-function FilterProducts() {
-  const [valueSlider, setValueSlider] = useState([50_000, 500_000]);
+function FilterProducts({ min, max, categories, activeCategory }) {
+  const [valueSlider, setValueSlider] = useState([min, max]);
   const [isShowFilterContent, setIsShowFilterContent] = useState(false);
   const router = useRouter();
 
@@ -87,17 +87,18 @@ function FilterProducts() {
             <li>
               <Link href="/shop">دسته بندی نشده</Link>
             </li>
-            <li>
-              <Link href="/product-category/test" className={styles.active}>
-                مبل
-              </Link>
-            </li>
-            <li>
-              <Link href="/product-category/test">صندلی</Link>
-            </li>
-            <li>
-              <Link href="/product-category/test">دکور</Link>
-            </li>
+            {categories?.map((category) => (
+              <li key={category._id}>
+                <Link
+                  href={`/product-category/${category.shortName}`}
+                  className={
+                    category.shortName === activeCategory ? styles.active : ""
+                  }
+                >
+                  {category.title}
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
         <div className={styles.price}>
@@ -108,8 +109,8 @@ function FilterProducts() {
             <Slider
               value={valueSlider}
               onChange={(e, value) => setValueSlider(value)}
-              min={0}
-              max={500_000}
+              min={min}
+              max={max}
               valueLabelDisplay="off"
               className={styles.slider_input}
               disableSwap

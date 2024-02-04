@@ -1,6 +1,7 @@
 import Categories from "@/components/templates/Home/Categories";
 import PopularProducts from "@/components/templates/Home/PopularProducts";
 import Slider from "@/components/templates/Home/Slider";
+import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
 import productModel from "@/models/product";
 import Head from "next/head";
@@ -20,6 +21,8 @@ function Home({ categories, products }) {
 }
 
 export async function getStaticProps() {
+  await connectToDB();
+
   const categories = await categoryModel.find().populate("products").lean();
   const products = await productModel.find();
   const popularProducts = products

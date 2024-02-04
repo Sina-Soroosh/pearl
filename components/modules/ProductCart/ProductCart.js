@@ -1,8 +1,6 @@
 import React from "react";
 import styles from "@/styles/modules/ProductCart/ProductCart.module.css";
 import Link from "next/link";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeartCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
 function ProductCart(props) {
   return (
