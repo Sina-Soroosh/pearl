@@ -6,21 +6,30 @@ import OrderBy from "@/components/modules/OrderBy/OrderBy";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
 import Pagination from "@/components/modules/Pagination/Pagination";
 
-function Main() {
+function Main(props) {
   return (
     <>
       <Breadcrumb
         links={[
           { id: 1, title: "فروشگاه", href: "/shop" },
-          { id: 2, title: "تست", href: "/product-category/test" },
+          {
+            id: 2,
+            title: props.title,
+            href: `/product-category/${props.active}`,
+          },
         ]}
-        title="تست"
+        title={props.title}
       />
 
       <div className={styles.content}>
         <div className={styles.top_content}>
           <div className={styles.filter}>
-            <FilterProducts />
+            <FilterProducts
+              min={props.minPrice}
+              max={props.maxPrice}
+              categories={props.categories}
+              activeCategory={props.active}
+            />
           </div>
           <div className={styles.order}>
             <OrderBy />
@@ -28,21 +37,12 @@ function Main() {
         </div>
         <div className={styles.main_content}>
           <div className="row">
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
+            {props.products.map((product) => (
+              <ProductCart {...product} key={product._id} />
+            ))}
           </div>
         </div>
-        <Pagination lastPage={3} />
+        <Pagination lastPage={props.lastPage} />
       </div>
     </>
   );
