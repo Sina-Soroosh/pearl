@@ -7,16 +7,17 @@ import ProductCart from "@/components/modules/ProductCart/ProductCart";
 import Pagination from "@/components/modules/Pagination/Pagination";
 import { useRouter } from "next/router";
 
-function Main() {
+function Main(props) {
   const {
     query: { q },
   } = useRouter();
+
   return (
     <>
       <Breadcrumb
         links={[
           { id: 1, title: "فروشگاه", href: "/shop" },
-          { id: 2, title: `نیجه جستجو "${q}"`, href: `/search/?q=${q}` },
+          { id: 2, title: `نتیجه جستجو "${q}"`, href: `/search/?q=${q}` },
         ]}
         title="فروشگاه"
       />
@@ -24,29 +25,32 @@ function Main() {
       <div className={styles.content}>
         <div className={styles.top_content}>
           <div className={styles.filter}>
-            <FilterProducts />
+            {props.products.length ? (
+              <FilterProducts
+                min={props.minPrice}
+                max={props.maxPrice}
+                categories={props.categories}
+              />
+            ) : null}
           </div>
           <div className={styles.order}>
-            <OrderBy />
+            {props.products.length ? <OrderBy /> : null}
           </div>
         </div>
         <div className={styles.main_content}>
           <div className="row">
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
-            <ProductCart />
+            {props.products.map((product) => (
+              <ProductCart {...product} key={product._id} />
+            ))}
+
+            {props.products.length ? null : (
+              <div className="alert alert-primary">محصولی یافت نشد</div>
+            )}
           </div>
         </div>
-        <Pagination lastPage={3} />
+        {props.products.length ? (
+          <Pagination lastPage={props.lastPage} />
+        ) : null}
       </div>
     </>
   );
