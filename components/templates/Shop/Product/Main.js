@@ -159,15 +159,16 @@ function Main(props) {
               </div>
             </div>
             <div className="col-12">
-              <div className={styles.related_products}>
-                <h4>محصولات مرتبط</h4>
-                <div className="row">
-                  <ProductCart />
-                  <ProductCart />
-                  <ProductCart />
-                  <ProductCart />
+              {props.relatedProducts.length !== 0 ? (
+                <div className={styles.related_products}>
+                  <h4>محصولات مرتبط</h4>
+                  <div className="row">
+                    {props.relatedProducts.map((product) => (
+                      <ProductCart key={product._id} {...product} />
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
