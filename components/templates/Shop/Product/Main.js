@@ -148,7 +148,10 @@ function Main(props) {
                   <TabPanel value="comments">
                     <div className={styles.comments}>
                       <div className={styles.content}>
-                        <CreateComment user={props.user} />
+                        <CreateComment
+                          user={props.user}
+                          shortName={props.product.shortName}
+                        />
                         {props.comments.map((comment) => (
                           <CommentBox {...comment} key={comment._id} />
                         ))}
