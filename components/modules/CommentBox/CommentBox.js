@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/modules/CommentBox/CommentBox.module.css";
 import { Avatar, Rating } from "@mui/material";
 
-function CommentBox() {
+function CommentBox(props) {
   return (
     <>
       <div className={styles.comment}>
@@ -17,13 +17,13 @@ function CommentBox() {
 
           <div className={styles.infos}>
             <div className={styles.name}>
-              <h3>Sina</h3>
+              <h3>{props.creator.username}</h3>
             </div>
             <div className={styles.stars}>
-              <Rating name="half-rating" value={3} readOnly />
+              <Rating name="half-rating" value={props.star} readOnly />
             </div>
             <div className={styles.body}>
-              <p>تستی</p>
+              <p>{props.body}</p>
             </div>
           </div>
         </div>

@@ -2,12 +2,11 @@ import Main from "@/components/templates/Shop/Product/Main";
 import { connectToDB } from "@/config/db";
 import commentModel from "@/models/comment";
 import productModel from "@/models/product";
+import { getMe } from "@/utils/myAccount";
 import Head from "next/head";
 import React from "react";
 
 function Product(props) {
-  console.log(props.relatedProducts);
-
   return (
     <>
       <Head>
@@ -23,6 +22,7 @@ export const getServerSideProps = async (context) => {
   await connectToDB();
 
   const { shortName } = context.query;
+  const user = await getMe(context.req.cookies);
   const product = await productModel
     .findOne({ shortName })
     .populate([{ path: "category", select: "title shortName" }]);
@@ -52,6 +52,7 @@ export const getServerSideProps = async (context) => {
     props: {
       product: JSON.parse(JSON.stringify(product)),
       comments: JSON.parse(JSON.stringify(comments)),
+      user: JSON.parse(JSON.stringify(user)),
       relatedProducts: JSON.parse(JSON.stringify(relatedProducts.slice(0, 4))),
     },
   };

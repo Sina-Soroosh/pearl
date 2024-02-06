@@ -130,52 +130,28 @@ function Main(props) {
                   </Box>
                   <TabPanel value="description">
                     <div className={styles.description}>
-                      <p>
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-                        چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون
-                        بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                        برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با
-                        هدف بهبود ابزارهای کاربردی می باشد.
-                      </p>
-                      <p>
-                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت
-                        چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون
-                        بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و
-                        برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با
-                        هدف بهبود ابزارهای کاربردی می باشد. لورم ایپسوم متن
-                        ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
-                        از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله
-                        در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                        تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود
-                        ابزارهای کاربردی می باشد.
-                      </p>
+                      {parse(props.product.desc)}
                     </div>
                   </TabPanel>
                   <TabPanel value="details">
                     <table className={styles.details}>
                       <tbody>
-                        <tr>
-                          <th>ارتفاع دسته</th>
-                          <td>37-45 اینچ</td>
-                        </tr>
-                        <tr>
-                          <th>عرض</th>
-                          <td>37 اینچ</td>
-                        </tr>
-                        <tr>
-                          <th>چرخ ها</th>
-                          <td>12 اینچ</td>
-                        </tr>
+                        {props.product.infos.map((info) => (
+                          <tr key={info._id}>
+                            <th>{info.title}</th>
+                            <td>{info.value}</td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </TabPanel>
                   <TabPanel value="comments">
                     <div className={styles.comments}>
                       <div className={styles.content}>
-                        <CreateComment />
-                        <CommentBox />
-                        <CommentBox />
-                        <CommentBox />
+                        <CreateComment user={props.user} />
+                        {props.comments.map((comment) => (
+                          <CommentBox {...comment} key={comment._id} />
+                        ))}
                       </div>
                     </div>
                   </TabPanel>
