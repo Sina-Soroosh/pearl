@@ -10,8 +10,9 @@ import { TabContext, TabList, TabPanel } from "@mui/lab";
 import CommentBox from "@/components/modules/CommentBox/CommentBox";
 import CreateComment from "@/components/modules/CreateComment/CreateComment";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
+import parse from "html-react-parser";
 
-function Main() {
+function Main(props) {
   const [isZoomImage, setIsZoomImage] = useState(false);
   const [tabsValue, setTabsValue] = React.useState("description");
 
@@ -33,10 +34,7 @@ function Main() {
                   isZoomed={isZoomImage}
                   onZoomChange={(value) => setIsZoomImage(value)}
                 >
-                  <img
-                    src="https://auros.1webstar.ir/wp-content/uploads/2018/10/1-33.jpg"
-                    alt=""
-                  />
+                  <img src={props.product.image} alt={props.product.title} />
                   <span className={styles.zoom_icon} onClick={zoomImageHandler}>
                     <FontAwesomeIcon icon={faMagnifyingGlassPlus} />
                   </span>
@@ -46,47 +44,50 @@ function Main() {
             <div className="col-md-6">
               <div className={styles.info_product}>
                 <div className={styles.title}>
-                  <h1>لاین کارکنان</h1>
+                  <h1>{props.product.title}</h1>
                 </div>
                 <div className={styles.price}>
-                  <span>165,000 تومان</span>
-                  <span className={styles.discount}>183,000 تومان</span>
+                  {props.product.discount === 0 ? (
+                    <span>{props.product.price.toLocaleString()} تومان</span>
+                  ) : (
+                    <>
+                      <span>
+                        {(
+                          props.product.price *
+                          ((100 - props.product.discount) / 100)
+                        ).toLocaleString()}{" "}
+                        تومان
+                      </span>{" "}
+                      <span className={styles.discount}>
+                        {props.product.price.toLocaleString()} تومان
+                      </span>
+                    </>
+                  )}
                 </div>
 
-                <div className={styles.desc}>
-                  <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                    با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                    و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                    تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                    کاربردی می باشد.
-                  </p>
-                  <p>
-                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و
-                    با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه
-                    و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی
-                    تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای
-                    کاربردی می باشد. لورم ایپسوم متن ساختگی با تولید سادگی
-                    نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.
-                    چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که
-                    لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
-                    متنوع با هدف بهبود ابزارهای کاربردی می باشد.
-                  </p>
-                </div>
-                <div className={styles.unavailable}>
-                  <p>
-                    در حال حاضر این محصول در انبار موجود نیست و در دسترس نمی
-                    باشد.
-                  </p>
-                </div>
-                <div className={styles.buttons}>
-                  <button className={styles.add_cart}>
-                    افزودن به سبد خرید
-                  </button>
-                </div>
+                <div className={styles.desc}>{parse(props.product.desc)}</div>
+                {props.product.isAvailable ? (
+                  <div className={styles.buttons}>
+                    <button className={styles.add_cart}>
+                      افزودن به سبد خرید
+                    </button>
+                  </div>
+                ) : (
+                  <div className={styles.unavailable}>
+                    <p>
+                      در حال حاضر این محصول در انبار موجود نیست و در دسترس نمی
+                      باشد.
+                    </p>
+                  </div>
+                )}
                 <div className={styles.category}>
                   <span>
-                    دسته : <Link href="/product-category/test">تست</Link>
+                    دسته :{" "}
+                    <Link
+                      href={`/product-category/${props.product.category.shortName}`}
+                    >
+                      {props.product.category.title}
+                    </Link>
                   </span>
                 </div>
               </div>
@@ -171,10 +172,10 @@ function Main() {
                   <TabPanel value="comments">
                     <div className={styles.comments}>
                       <div className={styles.content}>
-                        <CommentBox />
-                        <CommentBox />
-                        <CommentBox />
                         <CreateComment />
+                        <CommentBox />
+                        <CommentBox />
+                        <CommentBox />
                       </div>
                     </div>
                   </TabPanel>
