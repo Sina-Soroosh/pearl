@@ -1,5 +1,6 @@
 import { connectToDB } from "@/config/db";
 import addressModel from "@/models/address";
+import cartModel from "@/models/cart";
 import commentModel from "@/models/comment";
 import productModel from "@/models/product";
 import userModel from "@/models/user";
@@ -43,6 +44,8 @@ const users = async (req, res) => {
         await userModel.findOneAndDelete({ _id: userMain._id });
 
         await addressModel.findOneAndDelete({ user: userMain._id });
+
+        await cartModel.findOneAndDelete({ user: userMain._id });
 
         return res.json({ message: "Remove user successfully :))" });
       }

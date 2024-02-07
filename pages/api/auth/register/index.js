@@ -1,5 +1,6 @@
 import { connectToDB } from "@/config/db";
 import addressModel from "@/models/address";
+import cartModel from "@/models/cart";
 import userModel from "@/models/user";
 import { generateToken, hashedPasswordHandler } from "@/utils/auth";
 import userCheck from "@/validators/user";
@@ -46,6 +47,11 @@ const register = async (req, res) => {
 
         await addressModel.create({
           user: user._id,
+        });
+
+        await cartModel.create({
+          user: user._id,
+          products: [],
         });
 
         const token = generateToken({ email });
