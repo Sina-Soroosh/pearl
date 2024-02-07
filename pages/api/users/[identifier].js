@@ -1,5 +1,7 @@
 import { connectToDB } from "@/config/db";
 import addressModel from "@/models/address";
+import commentModel from "@/models/comment";
+import productModel from "@/models/product";
 import userModel from "@/models/user";
 import { hashedPasswordHandler } from "@/utils/auth";
 import { getMe } from "@/utils/myAccount";
@@ -35,6 +37,8 @@ const users = async (req, res) => {
             message: "You can't remove yourself !!",
           });
         }
+
+        await commentModel.deleteMany({ creator: userMain._id });
 
         await userModel.findOneAndDelete({ _id: userMain._id });
 
