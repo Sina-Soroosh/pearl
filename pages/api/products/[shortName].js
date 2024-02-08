@@ -1,4 +1,5 @@
 import { connectToDB } from "@/config/db";
+import cartModel from "@/models/cart";
 import categoryModel from "@/models/category";
 import commentModel from "@/models/comment";
 import productModel from "@/models/product";
@@ -110,6 +111,28 @@ const product = async (req, res) => {
             .status(403)
             .json({ message: "You don't access to data !!" });
         }
+
+        const carts = await cartModel.find({
+          "products.product": product._id,
+        });
+
+        const editCarts = async () => {
+          await carts.map(async (cart) => {
+            const productsToCart = cart.products.filter(
+              ({ product: productID }) =>
+                productID.toString() !== product._id.toString()
+            );
+
+            return await cartModel.findOneAndUpdate(
+              { _id: cart._id },
+              { products: productsToCart }
+            );
+          });
+
+          return;
+        };
+
+        await editCarts();
 
         await commentModel.deleteMany({ product: product._id });
 
