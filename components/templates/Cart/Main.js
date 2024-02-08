@@ -10,6 +10,26 @@ function Main(props) {
   const [cart, setCart] = useState(props.cart);
   const [total, setTotal] = useState(props.total);
 
+  const getCartHandler = async () => {
+    const res = await fetch("/api/cart");
+
+    if (res.status === 200) {
+      const cart = await res.json();
+
+      let total = 0;
+
+      cart.products.forEach((product) => {
+        total +=
+          product.product.price *
+          ((100 - product.product.discount) / 100) *
+          product.count;
+      });
+
+      setCart(cart);
+      setTotal(total);
+    }
+  };
+
   return (
     <>
       <Breadcrumb
@@ -21,11 +41,15 @@ function Main(props) {
         <div className={styles.content}>
           <div className="container-fluid">
             <div className="row">
-              {props.cart.products.length > 0 ? (
+              {cart.products.length > 0 ? (
                 <>
                   <div className="col-md-8">
                     {cart.products.map((product) => (
-                      <ProductBox {...product} key={product._id} />
+                      <ProductBox
+                        {...product}
+                        key={product._id}
+                        getCartHandler={getCartHandler}
+                      />
                     ))}
                   </div>
                   <div className="col-md-4">
@@ -36,8 +60,7 @@ function Main(props) {
                         </div>
                         <div className={styles.total}>
                           <p>
-                            مجموع :
-                            <span>{props.total.toLocaleString()} تومان</span>
+                            مجموع :<span>{total.toLocaleString()} تومان</span>
                           </p>
                         </div>
                         <div className={styles.continue_btn}>
