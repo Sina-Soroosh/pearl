@@ -5,6 +5,7 @@ import { getMe } from "@/utils/myAccount";
 import categoryCheck from "@/validators/category";
 import comments from "../comments";
 import productModel from "@/models/product";
+import cartModel from "@/models/cart";
 
 const category = async (req, res) => {
   connectToDB();
@@ -74,6 +75,13 @@ const category = async (req, res) => {
 
         await mainCategory.products.forEach(async (product) => {
           await commentModel.deleteMany({ product: product._id });
+
+          await cartModel.updateMany(
+            {
+              "products.product": product._id,
+            },
+            { $pull: { products: { product: product._id } } }
+          );
         });
 
         await productModel.deleteMany({ category: mainCategory._id });
