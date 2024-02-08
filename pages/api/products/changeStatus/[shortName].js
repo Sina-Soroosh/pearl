@@ -26,27 +26,12 @@ const changeStatus = async (req, res) => {
         }
 
         if (product.isAvailable) {
-          const carts = await cartModel.find({
-            "products.product": product._id,
-          });
-
-          const editCarts = async () => {
-            await carts.map(async (cart) => {
-              const productsToCart = cart.products.filter(
-                ({ product: productID }) =>
-                  productID.toString() !== product._id.toString()
-              );
-
-              return await cartModel.findOneAndUpdate(
-                { _id: cart._id },
-                { products: productsToCart }
-              );
-            });
-
-            return;
-          };
-
-          await editCarts();
+          await cartModel.updateMany(
+            {
+              "products.product": product._id,
+            },
+            { $pull: { products: { product: product._id } } }
+          );
         }
 
         await productModel.findOneAndUpdate(
