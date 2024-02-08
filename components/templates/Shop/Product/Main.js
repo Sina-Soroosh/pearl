@@ -11,16 +11,82 @@ import CommentBox from "@/components/modules/CommentBox/CommentBox";
 import CreateComment from "@/components/modules/CreateComment/CreateComment";
 import ProductCart from "@/components/modules/ProductCart/ProductCart";
 import parse from "html-react-parser";
+import { useRouter } from "next/router";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
 
 function Main(props) {
   const [isZoomImage, setIsZoomImage] = useState(false);
   const [tabsValue, setTabsValue] = React.useState("description");
+  const router = useRouter();
+  const swal = withReactContent(Swal);
 
   const changeTabsValueHandler = (event, newValue) => {
     setTabsValue(newValue);
   };
   const zoomImageHandler = () => {
     setIsZoomImage(true);
+  };
+
+  const addToCartHandler = async (Swal) => {
+    const res = await fetch("/api/cart/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product: props.product.shortName }),
+    });
+
+    Swal.close();
+
+    if (res.status === 401) {
+      swal
+        .fire({
+          title: "لطفا ابتدا وارد حساب کاربری خود شوید.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        })
+        .then(() => {
+          router.push("/login");
+        });
+    } else if (res.status === 404 || res.status === 400) {
+      swal.fire({
+        title: "ما این محصول را تموم کردیم.",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+    } else if (res.status === 201) {
+      swal.fire({
+        title: (
+          <p style={{ fontSize: "15px" }}>
+            محصول با موفقیت به سبد خرید شما اضافه شد
+          </p>
+        ),
+        toast: true,
+        position: "bottom-right",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+        icon: "success",
+      });
+    }
+  };
+
+  const onSubmit = () => {
+    swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        addToCartHandler(Swal);
+      },
+    });
   };
 
   return (
@@ -68,7 +134,7 @@ function Main(props) {
                 <div className={styles.desc}>{parse(props.product.desc)}</div>
                 {props.product.isAvailable ? (
                   <div className={styles.buttons}>
-                    <button className={styles.add_cart}>
+                    <button className={styles.add_cart} onClick={onSubmit}>
                       افزودن به سبد خرید
                     </button>
                   </div>

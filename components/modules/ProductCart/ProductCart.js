@@ -31,15 +31,11 @@ function ProductCart(props) {
           router.push("/login");
         });
     } else if (res.status === 404 || res.status === 400) {
-      swal
-        .fire({
-          title: "ما این محصول را تموم کردیم.",
-          icon: "error",
-          confirmButtonText: "باشه",
-        })
-        .then(() => {
-          router.push("/login");
-        });
+      swal.fire({
+        title: "ما این محصول را تموم کردیم.",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
     } else if (res.status === 201) {
       swal.fire({
         title: (
