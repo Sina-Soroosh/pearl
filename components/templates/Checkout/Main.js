@@ -3,7 +3,7 @@ import styles from "@/styles/templates/Checkout/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import CheckoutForm from "@/components/modules/CheckoutForm/CheckoutForm";
 
-function Main() {
+function Main(props) {
   return (
     <>
       <Breadcrumb
@@ -16,7 +16,7 @@ function Main() {
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-8">
-                <CheckoutForm />
+                <CheckoutForm {...props.address} />
               </div>
               <div className="col-lg-4">
                 <div className={styles.list}>
@@ -24,26 +24,31 @@ function Main() {
                     <h3>سفارش شما</h3>
                   </div>
                   <ul className={styles.items}>
-                    <li>
-                      <div className={styles.name}>
-                        <span>اسپیکر × 2</span>
-                      </div>
-                      <div className={styles.price}>
-                        <span>144,000 تومان</span>
-                      </div>
-                    </li>
-                    <li>
-                      <div className={styles.name}>
-                        <span>اسپیکر × 2</span>
-                      </div>
-                      <div className={styles.price}>
-                        <span>144,000 تومان</span>
-                      </div>
-                    </li>
+                    {props.cart.products.map((product) => (
+                      <li key={product._id}>
+                        <div className={styles.name}>
+                          <span>
+                            {product.product.title} × {product.count}
+                          </span>
+                        </div>
+                        <div className={styles.price}>
+                          <span>
+                            {(
+                              product.product.price *
+                              ((100 - product.product.discount) / 100) *
+                              product.count
+                            ).toLocaleString()}{" "}
+                            تومان
+                          </span>
+                        </div>
+                      </li>
+                    ))}
                   </ul>
                   <div className={styles.total}>
                     <span>مجموع</span>
-                    <span className={styles.price}>220,000 تومان</span>
+                    <span className={styles.price}>
+                      {props.total.toLocaleString()} تومان
+                    </span>
                   </div>
                 </div>
               </div>
