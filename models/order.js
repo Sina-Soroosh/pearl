@@ -83,6 +83,10 @@ const orderSchema = mongoose.Schema(
       enum: ["pending", "shipped", "delivered"],
       required: true,
     },
+    desc: {
+      type: String,
+      required: false,
+    },
   },
   {
     timestamps: true,
