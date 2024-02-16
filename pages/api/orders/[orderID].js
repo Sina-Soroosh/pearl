@@ -1,7 +1,6 @@
 import { connectToDB } from "@/config/db";
 import orderModel from "@/models/order";
 import { getMe } from "@/utils/myAccount";
-import { isValidObjectId } from "mongoose";
 
 const order = async (req, res) => {
   connectToDB();
