@@ -16,7 +16,7 @@ const orders = async (req, res) => {
 
     switch (req.method) {
       case "GET": {
-        const userOrders = await orderModel.find({ user: user._id });
+        const userOrders = await orderModel.find({ userID: user._id });
 
         return res.json(userOrders);
       }

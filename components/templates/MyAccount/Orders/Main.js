@@ -4,7 +4,7 @@ import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 import Link from "next/link";
 
-function Main() {
+function Main({ orders }) {
   return (
     <>
       <Breadcrumb
@@ -35,17 +35,32 @@ function Main() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>
-                          <Link href="/my-account/orders/57671">#57671</Link>
-                        </td>
-                        <td>20/03/2024</td>
-                        <td>در حال بررسی</td>
-                        <td>500,000 تومان</td>
-                        <td>
-                          <Link href="/my-account/orders/57671">مشاهده</Link>
-                        </td>
-                      </tr>
+                      {orders.map((order) => (
+                        <tr key={order._id}>
+                          <td>
+                            <Link href={`/my-account/orders/${order.orderID}`}>
+                              #{order.orderID}
+                            </Link>
+                          </td>
+                          <td>
+                            {order.createdAt.slice(0, 4)}/
+                            {order.createdAt.slice(5, 7)}/
+                            {order.createdAt.slice(8, 10)}
+                          </td>
+                          <td>
+                            {(order.status === "pending" && "در حال بررسی") ||
+                              (order.status === "shipped" && "در حال ارسال") ||
+                              (order.status === "delivered" &&
+                                "تحویل داده شده")}
+                          </td>
+                          <td>{order.total.toLocaleString()} تومان</td>
+                          <td>
+                            <Link href={`/my-account/orders/${order.orderID}`}>
+                              مشاهده
+                            </Link>
+                          </td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
