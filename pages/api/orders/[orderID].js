@@ -30,6 +30,15 @@ const order = async (req, res) => {
         return res.json(mainOrder);
       }
       case "DELETE": {
+        if (user.role !== "ADMIN") {
+          return res
+            .status(403)
+            .json({ message: "You don't access to data !!" });
+        }
+
+        await orderModel.findOneAndDelete({ orderID });
+
+        return res.json({ message: "Remove order is successfully !!" });
       }
       default:
         return res.status(405).json({ message: "The method is not valid" });
