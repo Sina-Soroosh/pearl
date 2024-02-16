@@ -1,8 +1,85 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "@/styles/modules/Footer/Footer.module.css";
 import Link from "next/link";
+import withReactContent from "sweetalert2-react-content";
+import Swal from "sweetalert2";
+import newsletterCheck from "@/validators/newsletter";
 
 function Footer() {
+  const emailRef = useRef();
+  const swal = withReactContent(Swal);
+
+  const addNewslettersHandler = async (Swal) => {
+    const email = emailRef.current.value;
+
+    const res = await fetch("/api/newsletters", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    Swal.close();
+
+    if (res.status === 400) {
+      swal.fire({
+        title: "لطفا یک ایمیل معتبر وارد نمایید !",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+    } else if (res.status === 422) {
+      swal.fire({
+        title: "قبلا این ایمیل ثبت شده",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+    } else if (res.status === 201) {
+      swal.fire({
+        title: "با موفقیت در خبرنامه عضو شدید",
+        icon: "success",
+        confirmButtonText: "باشه",
+      });
+
+      emailRef.current.value = "";
+    } else {
+      swal.fire({
+        title: "خطایی رخ داده \n لطفا اتصال خود را چک کنید",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const email = emailRef.current.value;
+
+    const isValidEmail = newsletterCheck({ email });
+
+    if (isValidEmail !== true) {
+      swal.fire({
+        title: "لطفا یک ایمیل معتبر وارد نمایید !",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+
+      return;
+    }
+
+    swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        addNewslettersHandler(Swal);
+      },
+    });
+  };
+
   return (
     <>
       <footer className={styles.footer}>
@@ -36,13 +113,13 @@ function Footer() {
                   <h4>لینک های مفید</h4>
                 </li>
                 <li>
-                  <Link href="/">درباره ما</Link>
+                  <Link href="/about-us">درباره ما</Link>
                 </li>
                 <li>
-                  <Link href="/">تماس با ما</Link>
+                  <Link href="/contact-us">تماس با ما</Link>
                 </li>
                 <li>
-                  <Link href="/">پشتیبانی</Link>
+                  <Link href="/support">پشتیبانی</Link>
                 </li>
               </ul>
             </div>
@@ -54,8 +131,12 @@ function Footer() {
                 <div className={styles.desc}>
                   <p>از جدیدترین اخبار و تخفیف های ما مطلع شوید!</p>
                 </div>
-                <form className={styles.form}>
-                  <input type="text" placeholder="ایمیل خود را وارد کنید" />
+                <form className={styles.form} onSubmit={onSubmit}>
+                  <input
+                    type="text"
+                    placeholder="ایمیل خود را وارد کنید"
+                    ref={emailRef}
+                  />
                   <button type="submit">عضویت</button>
                 </form>
               </div>
