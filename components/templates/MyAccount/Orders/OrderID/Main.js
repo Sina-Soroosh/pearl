@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import MyAccountMenu from "@/components/modules/MyAccountMenu/MyAccountMenu";
 
-function Main() {
+function Main({ order }) {
   const { query } = useRouter();
 
   return (
@@ -33,8 +33,19 @@ function Main() {
                 <div className={styles.text}>
                   <p>
                     سفارش #<span>{query.orderID}</span> در تاریخ{" "}
-                    <span>20/03/2024</span> ثبت شده است و در حال حاضر در وضعیت
-                    در <span>انتظار بررسی</span> می‌باشد.
+                    <span>
+                      {" "}
+                      {order.createdAt.slice(0, 4)}/
+                      {order.createdAt.slice(5, 7)}/
+                      {order.createdAt.slice(8, 10)}
+                    </span>{" "}
+                    ثبت شده است و در حال حاضر در وضعیت در{" "}
+                    <span>
+                      {(order.status === "pending" && "در حال بررسی") ||
+                        (order.status === "shipped" && "در حال ارسال") ||
+                        (order.status === "delivered" && "تحویل داده شده")}
+                    </span>{" "}
+                    می‌باشد.
                   </p>
                 </div>
                 <div className={styles.table}>
@@ -46,21 +57,20 @@ function Main() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>اسپیکر × 2</td>
-                        <td>500,000 تومان</td>
-                      </tr>
-                      <tr>
-                        <td>اسپیکر × 2</td>
-                        <td>500,000 تومان</td>
-                      </tr>
-                      <tr>
-                        <td>اسپیکر × 2</td>
-                        <td>500,000 تومان</td>
-                      </tr>
+                      {order.products.map((product) => (
+                        <tr key={product._id}>
+                          <td>
+                            {product.title} × {product.count}
+                          </td>
+                          <td>
+                            {(product.price * product.count).toLocaleString()}{" "}
+                            تومان
+                          </td>
+                        </tr>
+                      ))}
                       <tr>
                         <td>قیمت نهایی</td>
-                        <td>1,500,000 تومان</td>
+                        <td>{order.total.toLocaleString()} تومان</td>
                       </tr>
                     </tbody>
                   </table>
