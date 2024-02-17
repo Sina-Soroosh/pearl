@@ -3,7 +3,7 @@ import styles from "@/styles/templates/faq/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import AccordionBox from "@/components/modules/AccordionBox/AccordionBox";
 
-function Main() {
+function Main({ faqs }) {
   return (
     <>
       <Breadcrumb
@@ -13,9 +13,9 @@ function Main() {
 
       <div className={styles.faq}>
         <div className={styles.content}>
-          <AccordionBox />
-          <AccordionBox />
-          <AccordionBox />
+          {faqs.map((question) => (
+            <AccordionBox key={question._id} {...question} />
+          ))}
         </div>
       </div>
     </>
