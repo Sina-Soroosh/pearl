@@ -16,9 +16,7 @@ function Main() {
         <div className="container">
           <div className={styles.content}>
             <div className={styles.accordions}>
-              <AccordionBox />
-              <AccordionBox />
-              <AccordionBox />
+              <AccordionBox body={""} />
             </div>
             <div className={styles.boxes}>
               <div className={styles.title}>
