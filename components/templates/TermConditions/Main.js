@@ -4,7 +4,7 @@ import React from "react";
 import styles from "@/styles/templates/TermConditions/Main.module.css";
 import SupportBox from "@/components/modules/SupportBox/SupportBox";
 
-function Main() {
+function Main({ rules }) {
   return (
     <>
       <Breadcrumb
@@ -16,7 +16,9 @@ function Main() {
         <div className="container">
           <div className={styles.content}>
             <div className={styles.accordions}>
-              <AccordionBox body={""} />
+              {rules.map((rule) => (
+                <AccordionBox {...rule} key={rule._id} />
+              ))}
             </div>
             <div className={styles.boxes}>
               <div className={styles.title}>
