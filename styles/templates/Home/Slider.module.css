@@ -33,12 +33,12 @@
 }
 
 .slide .image_slide img {
-    max-width: 100%;
+    max-width: 60%;
     max-height: 500px
 }
 
 .slide .title_slide h3 {
-    font-size: 90px;
+    font-size: 60px;
     color: #fff;
     font-weight: 800;
     margin-bottom: 5px;

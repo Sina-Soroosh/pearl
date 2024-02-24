@@ -4,16 +4,17 @@ import Slider from "@/components/templates/Home/Slider";
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
 import productModel from "@/models/product";
+import sliderModel from "@/models/slider";
 import Head from "next/head";
 import React from "react";
 
-function Home({ categories, products }) {
+function Home({ categories, products, sliders }) {
   return (
     <>
       <Head>
         <title>صفحه اصلی فروشگاه Pearl</title>
       </Head>
-      <Slider />
+      <Slider sliders={sliders} />
       <PopularProducts products={products} />
       <Categories categories={categories} />
     </>
@@ -28,11 +29,13 @@ export async function getStaticProps() {
   const popularProducts = products
     .sort((prev, next) => next.rating - prev.rating)
     .splice(0, 8);
+  const sliders = await sliderModel.find({}, "-__v -createdAt -updatedAt");
 
   return {
     props: {
       categories: JSON.parse(JSON.stringify(categories)),
       products: JSON.parse(JSON.stringify(popularProducts)),
+      sliders: JSON.parse(JSON.stringify(sliders)),
     },
     revalidate: 60 * 60 * 12,
   };
