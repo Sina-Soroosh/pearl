@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/styles/modules/ContactUsForm/ContactUsForm.module.css";
 import { Formik } from "formik";
 
-function ContactUsForm() {
+function ContactUsForm({ onSubmit }) {
   const initialValues = {
     name: "",
     email: "",
@@ -37,7 +37,11 @@ function ContactUsForm() {
   return (
     <>
       <div className={styles.form}>
-        <Formik initialValues={initialValues} validate={validateHandler}>
+        <Formik
+          initialValues={initialValues}
+          validate={validateHandler}
+          onSubmit={onSubmit}
+        >
           {({ values, errors, touched, handleChange, handleSubmit }) => (
             <form onSubmit={handleSubmit}>
               <div className="row">
