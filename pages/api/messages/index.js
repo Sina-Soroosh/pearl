@@ -1,6 +1,7 @@
 import { connectToDB } from "@/config/db";
 import messageModel from "@/models/message";
 import { getMe } from "@/utils/myAccount";
+import messageCheck from "@/validators/message";
 
 const messages = async (req, res) => {
   connectToDB();
@@ -21,6 +22,21 @@ const messages = async (req, res) => {
         return res.json(messages);
       }
       case "POST": {
+        const { name, email, message } = req.body;
+
+        const messageInfo = { name, email, message };
+
+        const isValidMessage = messageCheck(messageInfo);
+
+        if (isValidMessage !== true) {
+          return res.status(400).json({ message: "Parameters is not valid" });
+        }
+
+        await messageModel.create(messageInfo);
+
+        return res
+          .status(201)
+          .json({ message: "Create message successfully :))" });
       }
       default:
         return res.status(405).json({ message: "The method is not valid" });
