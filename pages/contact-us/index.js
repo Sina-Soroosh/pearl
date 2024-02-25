@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/ContactUs/Main";
 import Head from "next/head";
 import React from "react";
@@ -9,7 +10,9 @@ function ContactUs() {
         <title>Pearl - تماس با ما</title>
       </Head>
 
-      <Main />
+      <Transition>
+        <Main />
+      </Transition>
     </>
   );
 }

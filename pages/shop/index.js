@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/Shop/Main";
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
@@ -11,13 +12,15 @@ function Shop({ products, minPrice, maxPrice, lastPage, categories }) {
       <Head>
         <title>فروشگاه - Pearl</title>
       </Head>
-      <Main
-        products={products}
-        minPrice={minPrice}
-        maxPrice={maxPrice}
-        lastPage={lastPage}
-        categories={categories}
-      />
+      <Transition>
+        <Main
+          products={products}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          lastPage={lastPage}
+          categories={categories}
+        />
+      </Transition>
     </>
   );
 }

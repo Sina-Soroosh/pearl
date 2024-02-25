@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Categories from "@/components/templates/Home/Categories";
 import PopularProducts from "@/components/templates/Home/PopularProducts";
 import Slider from "@/components/templates/Home/Slider";
@@ -14,9 +15,11 @@ function Home({ categories, products, sliders }) {
       <Head>
         <title>صفحه اصلی فروشگاه Pearl</title>
       </Head>
-      <Slider sliders={sliders} />
-      <PopularProducts products={products} />
-      <Categories categories={categories} />
+      <Transition>
+        <Slider sliders={sliders} />
+        <PopularProducts products={products} />
+        <Categories categories={categories} />
+      </Transition>
     </>
   );
 }

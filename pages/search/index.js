@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/Search/Main";
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
@@ -15,7 +16,9 @@ function Search(props) {
         <title>Pearl - {`نتیجه جستوجو "${router.query.q}"`}</title>
       </Head>
 
-      <Main {...props} />
+      <Transition>
+        <Main {...props} />
+      </Transition>
     </>
   );
 }

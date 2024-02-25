@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/Cart/Main";
 import cartModel from "@/models/cart";
 import { getMe } from "@/utils/myAccount";
@@ -11,7 +12,9 @@ function Cart(props) {
         <title>سبد خرید - Pearl</title>
       </Head>
 
-      <Main {...props} />
+      <Transition>
+        <Main {...props} />
+      </Transition>
     </>
   );
 }

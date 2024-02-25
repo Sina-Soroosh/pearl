@@ -3,6 +3,7 @@ import Head from "next/head";
 import Main from "@/components/templates/TermConditions/Main";
 import { connectToDB } from "@/config/db";
 import ruleModel from "@/models/rule";
+import Transition from "@/components/modules/Transition/Transition";
 
 function TermConditions({ rules }) {
   return (
@@ -11,7 +12,9 @@ function TermConditions({ rules }) {
         <title>Pearl - قوانین و مقررات</title>
       </Head>
 
-      <Main rules={rules} />
+      <Transition>
+        <Main rules={rules} />
+      </Transition>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/WarrantyAndServices/Main";
 import Head from "next/head";
 import React from "react";
@@ -9,7 +10,9 @@ function WarrantyAndServices() {
         <title>Pearl - گارانتی و خدمات</title>
       </Head>
 
-      <Main />
+      <Transition>
+        <Main />
+      </Transition>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/Main";
 import { getMe } from "@/utils/myAccount";
 import Head from "next/head";
@@ -10,7 +11,9 @@ function MyAccount({ user }) {
         <title>Pearl - حساب کاربری من</title>
       </Head>
 
-      <Main user={user} />
+      <Transition>
+        <Main user={user} />
+      </Transition>
     </>
   );
 }

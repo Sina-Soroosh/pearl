@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/Orders/Main";
 import orderModel from "@/models/order";
 import { getMe } from "@/utils/myAccount";
@@ -11,7 +12,9 @@ function Orders({ orders }) {
         <title>Pearl - سفارش ها من</title>
       </Head>
 
-      <Main orders={orders} />
+      <Transition>
+        <Main orders={orders} />
+      </Transition>
     </>
   );
 }

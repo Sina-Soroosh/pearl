@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/EditAddress/Main";
 import addressModel from "@/models/address";
 import { getMe } from "@/utils/myAccount";
@@ -11,7 +12,9 @@ function EditAddress({ user, address }) {
         <title>Pearl - آدرس صورتحساب</title>
       </Head>
 
-      <Main user={user} address={address} />
+      <Transition>
+        <Main user={user} address={address} />
+      </Transition>
     </>
   );
 }

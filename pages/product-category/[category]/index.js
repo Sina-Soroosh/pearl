@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/ProductCategory/Main";
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
@@ -12,7 +13,9 @@ function Category(props) {
         <title>Pearl - دسته بندی {props.title}</title>
       </Head>
 
-      <Main {...props} />
+      <Transition>
+        <Main {...props} />
+      </Transition>
     </>
   );
 }

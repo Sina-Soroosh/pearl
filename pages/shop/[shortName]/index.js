@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/Shop/Product/Main";
 import { connectToDB } from "@/config/db";
 import commentModel from "@/models/comment";
@@ -13,7 +14,9 @@ function Product(props) {
         <title>Pearl - {props.product.title}</title>
       </Head>
 
-      <Main {...props} />
+      <Transition>
+        <Main {...props} />
+      </Transition>
     </>
   );
 }

@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/faq/Main";
 import { connectToDB } from "@/config/db";
 import faqModel from "@/models/faq";
@@ -11,7 +12,9 @@ function Faq({ faqs }) {
         <title>Pearl - سوالات متداول</title>
       </Head>
 
-      <Main faqs={faqs} />
+      <Transition>
+        <Main faqs={faqs} />
+      </Transition>
     </>
   );
 }

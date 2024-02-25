@@ -4,6 +4,7 @@ import Main from "@/components/templates/Checkout/Main";
 import { getMe } from "@/utils/myAccount";
 import cartModel from "@/models/cart";
 import addressModel from "@/models/address";
+import Transition from "@/components/modules/Transition/Transition";
 
 function Checkout(props) {
   return (
@@ -11,7 +12,10 @@ function Checkout(props) {
       <Head>
         <title>Pearl - صورت حساب</title>
       </Head>
-      <Main {...props} />
+
+      <Transition>
+        <Main {...props} />
+      </Transition>
     </>
   );
 }

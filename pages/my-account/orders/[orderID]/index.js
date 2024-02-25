@@ -1,3 +1,4 @@
+import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/Orders/OrderID/Main";
 import orderModel from "@/models/order";
 import { getMe } from "@/utils/myAccount";
@@ -14,7 +15,9 @@ function OrderID({ order }) {
         <title>Pearl - سفارش #{query.orderID}</title>
       </Head>
 
-      <Main order={order} />
+      <Transition>
+        <Main order={order} />
+      </Transition>
     </>
   );
 }
