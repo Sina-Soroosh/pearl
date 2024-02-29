@@ -4,6 +4,12 @@ import Link from "next/link";
 import withReactContent from "sweetalert2-react-content";
 import Swal from "sweetalert2";
 import { useRouter } from "next/router";
+import { motion } from "framer-motion";
+
+const animate = {
+  initial: { opacity: 0, x: 0, y: 200 },
+  view: { opacity: 1, x: 0, y: 0 },
+};
 
 function ProductCart(props) {
   const router = useRouter();
@@ -72,7 +78,12 @@ function ProductCart(props) {
 
   return (
     <>
-      <div className="col-sm-6 col-lg-3">
+      <motion.div
+        initial={animate.initial}
+        whileInView={animate.view}
+        viewport={{ once: true }}
+        className="col-sm-6 col-lg-3"
+      >
         <div className={styles.product_cart}>
           <div className={styles.content}>
             <div className={styles.top_cart}>
@@ -128,7 +139,7 @@ function ProductCart(props) {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }
