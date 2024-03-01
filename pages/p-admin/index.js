@@ -1,6 +1,7 @@
 import React from "react";
 import Details from "@/panelAdminTemplates/Dashboard/Details/Details";
 import Charts from "@/panelAdminTemplates/Dashboard/Charts/Charts";
+import Tables from "@/panelAdminTemplates/Dashboard/Tables/Tables";
 
 function PanelAdmin() {
   return (
@@ -20,6 +21,7 @@ function PanelAdmin() {
           { month: "Feb", value: 9 },
         ]}
       />
+      <Tables />
     </>
   );
 }
