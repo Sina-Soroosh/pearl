@@ -1,0 +1,33 @@
+.box {
+    width: 100%;
+    padding: 10px 20px;
+    box-shadow: 0 0 10px 0px #00000026;
+    margin: 10px 0;
+}
+
+.box .content {
+    padding: 10px 0;
+    align-items: center;
+}
+
+.box .content .icon {
+    font-size: 35px;
+    color: #bbb;
+    display: flex;
+    justify-content: center;
+}
+
+.box .content .detail {
+    text-align: center;
+}
+
+.box .content .detail .value span {
+    font-size: 19px;
+    color: #000;
+    font-weight: 700;
+}
+
+.box .content .detail .title h3 {
+    font-size: 15px;
+    color: #bbb;
+}
