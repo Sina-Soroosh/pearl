@@ -12,9 +12,9 @@ const variants = {
   enter: { opacity: 1, x: 0, y: 0 },
 };
 
-export default function App({ Component, pageProps, x }) {
+export default function App({ Component, pageProps }) {
   const router = useRouter();
-  const isPanelAdmin = router.asPath.includes("p-admin");
+  const isPanelAdmin = router.pathname.includes("p-admin");
 
   return (
     <>
