@@ -1,7 +1,12 @@
 import React from "react";
+import Details from "@/panelAdminTemplates/Dashboard/Details/Details";
 
 function PanelAdmin() {
-  return <div>PanelAdmin</div>;
+  return (
+    <>
+      <Details />
+    </>
+  );
 }
 
 export default PanelAdmin;

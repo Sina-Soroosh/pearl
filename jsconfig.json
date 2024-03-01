@@ -1,7 +1,10 @@
 {
   "compilerOptions": {
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@/panelAdminTemplates/*": ["./components/templates/PanelAdmin/*"],
+      "@/panelAdminModules/*": ["./components/modules/PanelAdmin/*"],
+      "@/panelAdminStyles/*": ["./styles/templates/PanelAdmin/*"]
     }
   }
 }
