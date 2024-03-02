@@ -4,7 +4,7 @@ import { getMe } from "@/utils/myAccount";
 import messageCheck from "@/validators/message";
 
 const messages = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

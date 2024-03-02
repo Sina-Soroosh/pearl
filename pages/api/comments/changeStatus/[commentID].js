@@ -5,7 +5,7 @@ import { getMe } from "@/utils/myAccount";
 import { isValidObjectId } from "mongoose";
 
 const changeStatus = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const { commentID } = req.query;

@@ -4,7 +4,7 @@ import { comparedPasswordHandler, generateToken } from "@/utils/auth";
 import { serialize } from "cookie";
 
 const login = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

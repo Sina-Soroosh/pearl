@@ -4,7 +4,7 @@ import { getMe } from "@/utils/myAccount";
 import { isValidObjectId } from "mongoose";
 
 const message = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   const { messageID } = req.query;
 

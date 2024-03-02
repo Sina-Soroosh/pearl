@@ -3,7 +3,7 @@ import userModel from "@/models/user";
 import { verifyToken } from "@/utils/auth";
 
 const me = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

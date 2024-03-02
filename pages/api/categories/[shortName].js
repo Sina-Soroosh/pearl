@@ -8,7 +8,7 @@ import productModel from "@/models/product";
 import cartModel from "@/models/cart";
 
 const category = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const { shortName } = req.query;

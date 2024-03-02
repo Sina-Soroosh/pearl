@@ -5,7 +5,7 @@ import { getMe } from "@/utils/myAccount";
 import { isValidObjectId } from "mongoose";
 
 const comment = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   const { commentID } = req.query;
 

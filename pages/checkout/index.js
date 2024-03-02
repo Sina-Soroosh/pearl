@@ -5,6 +5,7 @@ import { getMe } from "@/utils/myAccount";
 import cartModel from "@/models/cart";
 import addressModel from "@/models/address";
 import Transition from "@/components/modules/Transition/Transition";
+import { connectToDB } from "@/config/db";
 
 function Checkout(props) {
   return (
@@ -21,6 +22,8 @@ function Checkout(props) {
 }
 
 export const getServerSideProps = async (context) => {
+  await connectToDB();
+
   const user = await getMe(context.req.cookies);
 
   if (!user) {

@@ -2,7 +2,7 @@ import { connectToDB } from "@/config/db";
 import { serialize } from "cookie";
 
 const logout = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

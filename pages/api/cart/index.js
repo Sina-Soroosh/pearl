@@ -3,7 +3,7 @@ import cartModel from "@/models/cart";
 import { getMe } from "@/utils/myAccount";
 
 const cart = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {
@@ -14,14 +14,12 @@ const cart = async (req, res) => {
           return res.status(401).json({ message: "You are unauthorized" });
         }
 
-        const cart = await cartModel
-          .findOne({ user: user._id })
-          .populate([
-            {
-              path: "products.product",
-              select: "shortName title price discount image",
-            },
-          ]);
+        const cart = await cartModel.findOne({ user: user._id }).populate([
+          {
+            path: "products.product",
+            select: "shortName title price discount image",
+          },
+        ]);
 
         return res.json(cart);
       }

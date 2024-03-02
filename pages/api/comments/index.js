@@ -5,7 +5,7 @@ import { getMe } from "@/utils/myAccount";
 import commentCheck from "@/validators/comment";
 
 const comments = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const user = await getMe(req.cookies);

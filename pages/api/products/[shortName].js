@@ -8,7 +8,7 @@ import productCheck from "@/validators/product";
 import { isValidObjectId } from "mongoose";
 
 const product = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const { shortName } = req.query;

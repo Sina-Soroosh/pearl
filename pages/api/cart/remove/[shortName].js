@@ -4,7 +4,7 @@ import productModel from "@/models/product";
 import { getMe } from "@/utils/myAccount";
 
 const removeToCart = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

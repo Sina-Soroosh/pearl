@@ -2,7 +2,7 @@ import { connectToDB } from "@/config/db";
 import provinceModel from "@/models/province";
 
 const cities = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

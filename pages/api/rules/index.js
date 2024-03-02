@@ -4,7 +4,7 @@ import { getMe } from "@/utils/myAccount";
 import ruleCheck from "@/validators/rule";
 
 const rules = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

@@ -14,7 +14,7 @@ function PanelAdmin(props) {
     <>
       <Details {...props.details} />
       <Charts {...props.charts} />
-      <Tables />
+      <Tables {...props.tables} />
     </>
   );
 }
@@ -46,19 +46,24 @@ export const getServerSideProps = async (ctx) => {
   ];
 
   let lastYear = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
-  let month = lastYear.getMonth() + 2;
-  const users = await userModel.find({}, "username email");
+  let month = lastYear.getMonth() + 2 > 12 ? 1 : lastYear.getMonth() + 2;
+  let year =
+    lastYear.getMonth() + 2 > 12
+      ? lastYear.getFullYear() + 1
+      : lastYear.getFullYear();
+  const users = await userModel.find({}, "username email createdAt");
   const products = await productModel.find();
   const comments = await commentModel.find();
-  const orders = await orderModel.find({}, "status id total createdAt");
+  const orders = await orderModel.find({}, "status orderID total createdAt");
+
   const ordersInLastYear = await orderModel.find({
     createdAt: {
-      $gte: `${lastYear.getFullYear()}/${lastYear.getMonth() + 2}/01`,
+      $gte: `${year}/${month}/01`,
     },
   });
   const usersInLastYear = await userModel.find({
     createdAt: {
-      $gte: `${lastYear.getFullYear()}/${lastYear.getMonth() + 2}/01`,
+      $gte: `${year}/${month}/01`,
     },
   });
   let orderRowsChart = [];
@@ -88,6 +93,51 @@ export const getServerSideProps = async (ctx) => {
     }
   }
 
+  const lastUsers = [...users]
+    .reverse()
+    .splice(0, 5)
+    .map((user) => {
+      const month =
+        user.createdAt.getMonth() + 1 > 9
+          ? user.createdAt.getMonth() + 1
+          : "0" + (user.createdAt.getMonth() + 1);
+      const day =
+        user.createdAt.getDate() > 9
+          ? user.createdAt.getDate()
+          : "0" + user.createdAt.getDate();
+
+      return {
+        id: user._id,
+        username: user.username,
+        email: user.email,
+        date: `${user.createdAt.getFullYear()}/${month}/${day}`,
+      };
+    });
+
+  const lastOrders = [...orders]
+    .reverse()
+    .splice(0, 5)
+    .map((order) => {
+      const month =
+        order.createdAt.getMonth() + 1 > 9
+          ? order.createdAt.getMonth() + 1
+          : "0" + (order.createdAt.getMonth() + 1);
+      const day =
+        order.createdAt.getDate() > 9
+          ? order.createdAt.getDate()
+          : "0" + order.createdAt.getDate();
+
+      return {
+        id: order.orderID,
+        total: `${order.total.toLocaleString()} تومان`,
+        status:
+          (order.status === "pending" && "در حال بررسی") ||
+          (order.status === "shipped" && "در حال ارسال") ||
+          (order.status === "delivered" && "تحویل داده شده"),
+        date: `${order.createdAt.getFullYear()}/${month}/${day}`,
+      };
+    });
+
   return {
     props: {
       details: {
@@ -100,7 +150,10 @@ export const getServerSideProps = async (ctx) => {
         dataSeals: orderRowsChart,
         dataUsers: userRowsChart,
       },
-      tables: {},
+      tables: {
+        lastUsers: JSON.parse(JSON.stringify(lastUsers)),
+        lastOrders: JSON.parse(JSON.stringify(lastOrders)),
+      },
     },
   };
 };

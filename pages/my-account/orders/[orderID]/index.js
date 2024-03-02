@@ -1,5 +1,6 @@
 import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/Orders/OrderID/Main";
+import { connectToDB } from "@/config/db";
 import orderModel from "@/models/order";
 import { getMe } from "@/utils/myAccount";
 import Head from "next/head";
@@ -23,6 +24,8 @@ function OrderID({ order }) {
 }
 
 export async function getServerSideProps(ctx) {
+  await connectToDB();
+
   const user = await getMe(ctx.req.cookies);
 
   if (user === false) {

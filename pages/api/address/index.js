@@ -4,7 +4,7 @@ import { getMe } from "@/utils/myAccount";
 import addressCheck from "@/validators/address";
 
 const address = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const user = await getMe(req.cookies);

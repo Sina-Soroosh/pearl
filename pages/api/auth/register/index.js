@@ -7,7 +7,7 @@ import userCheck from "@/validators/user";
 import { serialize } from "cookie";
 
 const register = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

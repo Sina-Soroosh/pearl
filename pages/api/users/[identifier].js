@@ -9,7 +9,7 @@ import { getMe } from "@/utils/myAccount";
 import userCheck from "@/validators/user";
 
 const users = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const user = await getMe(req.cookies);

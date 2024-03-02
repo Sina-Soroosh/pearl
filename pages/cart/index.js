@@ -1,5 +1,6 @@
 import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/Cart/Main";
+import { connectToDB } from "@/config/db";
 import cartModel from "@/models/cart";
 import { getMe } from "@/utils/myAccount";
 import Head from "next/head";
@@ -20,6 +21,8 @@ function Cart(props) {
 }
 
 export const getServerSideProps = async (context) => {
+  await connectToDB();
+
   const user = await getMe(context.req.cookies);
 
   if (!user) {

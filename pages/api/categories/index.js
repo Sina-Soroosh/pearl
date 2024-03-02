@@ -4,7 +4,7 @@ import { getMe } from "@/utils/myAccount";
 import categoryCheck from "@/validators/category";
 
 const categories = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const categoriesData = await categoryModel.find();

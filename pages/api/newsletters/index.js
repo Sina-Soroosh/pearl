@@ -3,7 +3,7 @@ import newsletterModel from "@/models/newsletter";
 import newsletterCheck from "@/validators/newsletter";
 
 const newsletters = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     switch (req.method) {

@@ -14,7 +14,7 @@ export const config = {
 };
 
 const products = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const productsData = await productModel.find().populate("category");

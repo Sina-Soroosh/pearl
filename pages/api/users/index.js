@@ -7,7 +7,7 @@ import userCheck from "@/validators/user";
 import { serialize } from "cookie";
 
 const users = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const user = await getMe(req.cookies);

@@ -3,7 +3,7 @@ import orderModel from "@/models/order";
 import { getMe } from "@/utils/myAccount";
 
 const changeStatus = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   const { orderID } = req.query;
 

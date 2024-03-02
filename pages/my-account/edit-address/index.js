@@ -1,5 +1,6 @@
 import Transition from "@/components/modules/Transition/Transition";
 import Main from "@/components/templates/MyAccount/EditAddress/Main";
+import { connectToDB } from "@/config/db";
 import addressModel from "@/models/address";
 import { getMe } from "@/utils/myAccount";
 import Head from "next/head";
@@ -20,6 +21,8 @@ function EditAddress({ user, address }) {
 }
 
 export async function getServerSideProps(ctx) {
+  await connectToDB();
+
   const user = await getMe(ctx.req.cookies);
 
   if (user === false) {

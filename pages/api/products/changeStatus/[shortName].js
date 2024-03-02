@@ -4,7 +4,7 @@ import productModel from "@/models/product";
 import { getMe } from "@/utils/myAccount";
 
 const changeStatus = async (req, res) => {
-  connectToDB();
+  await connectToDB();
 
   try {
     const { shortName } = req.query;
