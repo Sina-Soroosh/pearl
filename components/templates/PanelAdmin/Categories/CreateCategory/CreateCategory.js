@@ -61,11 +61,13 @@ function CreateCategory() {
         });
         break;
       case 201:
-        swal.fire({
-          title: "دسته بندی با موفقیت اضافه شد.",
-          icon: "success",
-          confirmButtonText: "باشه",
-        });
+        swal
+          .fire({
+            title: "دسته بندی با موفقیت اضافه شد.",
+            icon: "success",
+            confirmButtonText: "باشه",
+          })
+          .then(() => location.reload());
 
         titleRef.current.value = "";
         shortNameRef.current.value = "";
