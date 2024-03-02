@@ -1,0 +1,14 @@
+.details {
+    padding: 20px;
+}
+
+.details .content {
+    padding: 20px;
+    box-shadow: 0 0 10px 0px #00000026;
+}
+
+.details .content h3 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 800;
+}
