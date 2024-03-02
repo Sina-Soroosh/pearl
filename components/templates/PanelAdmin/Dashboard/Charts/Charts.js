@@ -25,7 +25,12 @@ function Charts({ dataSeals, dataUsers }) {
                 <AreaChart data={dataSeals}>
                   <XAxis dataKey="month" dy={5} />
                   <YAxis dx={-40} />
-                  <Tooltip formatter={(value) => ["مقدار فروش", value]} />
+                  <Tooltip
+                    formatter={(value) => [
+                      "مقدار فروش",
+                      `${value.toLocaleString()} تومان`,
+                    ]}
+                  />
                   <Area
                     type="monotone"
                     dataKey="value"

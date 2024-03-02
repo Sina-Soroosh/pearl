@@ -8,10 +8,15 @@ import userModel from "@/models/user";
 import productModel from "@/models/product";
 import commentModel from "@/models/comment";
 import orderModel from "@/models/order";
+import Head from "next/head";
 
 function PanelAdmin(props) {
   return (
     <>
+      <Head>
+        <title>پنل مدیریت</title>
+      </Head>
+
       <Details {...props.details} />
       <Charts {...props.charts} />
       <Tables {...props.tables} />
