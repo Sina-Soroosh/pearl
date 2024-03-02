@@ -6,7 +6,7 @@ function Categories() {
   return (
     <>
       <CreateCategory />
-      <CategoriesDetails />
+      <CategoriesDetails categories={[]} />
     </>
   );
 }
