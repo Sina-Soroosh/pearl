@@ -42,3 +42,13 @@
     font-size: 13px;
     margin-left: 5px;
 }
+
+.form_update {
+    text-align: right;
+}
+
+.form_update input {
+    font-size: 13px;
+    margin-bottom: 5px;
+    width: 100%;
+}
