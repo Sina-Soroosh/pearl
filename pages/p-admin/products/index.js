@@ -3,10 +3,15 @@ import ProductsDetails from "@/panelAdminTemplates/Products/ProductsDetails/Prod
 import { connectToDB } from "@/config/db";
 import { getMe } from "@/utils/myAccount";
 import productModel from "@/models/product";
+import Head from "next/head";
 
 function Products({ products }) {
   return (
     <>
+      <Head>
+        <title>پنل مدیریت - لیست محصولات</title>
+      </Head>
+
       <ProductsDetails products={products} />
     </>
   );
