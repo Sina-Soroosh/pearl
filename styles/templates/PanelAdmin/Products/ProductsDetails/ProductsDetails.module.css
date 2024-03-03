@@ -1,0 +1,44 @@
+.products {
+    padding: 20px;
+}
+
+.products .content {
+    padding: 20px;
+    box-shadow: 0 0 10px 0px #00000026;
+}
+
+.products .content .top_products {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.products .content .title h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000;
+}
+
+.products .content .create_product a {
+    font-size: 14px;
+}
+
+.products .content .cell {
+    font-size: 15px;
+}
+
+.products .content .table .image {
+    width: 70px;
+    max-height: 100px;
+}
+
+.products .content .cell a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.products .content .cell button {
+    font-size: 13px;
+    margin-left: 5px;
+}
