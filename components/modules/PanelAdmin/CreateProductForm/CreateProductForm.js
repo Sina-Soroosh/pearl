@@ -3,6 +3,7 @@ import { Formik } from "formik";
 import styles from "@/styles/modules/PanelAdmin/CreateProductForm/CreateProductForm.module.css";
 import dynamic from "next/dynamic";
 import InfosProduct from "../InfosProduct/InfosProduct";
+import Swal from "sweetalert2";
 
 const EditorText = dynamic(
   () => {
@@ -25,9 +26,68 @@ function CreateProductForm() {
     category: "",
   };
 
-  const validateHandler = (values) => {};
+  const validateHandler = (values) => {
+    let errors = {};
 
-  const onSubmit = (values) => {};
+    if (!values.image) {
+      errors.image = "لطفا عکس محصول را انتخاب کنید";
+    }
+
+    let idxDot = values.image.lastIndexOf(".") + 1;
+    let pathNameImage = values.image
+      .substr(idxDot, values.image.length)
+      .toLowerCase();
+
+    if (
+      pathNameImage != "jpg" &&
+      pathNameImage != "jpeg" &&
+      pathNameImage != "png"
+    ) {
+      errors.image = "لطفا فایلی انتخاب کنید که از نوع jpg یا jpeg یا png باشد";
+    }
+
+    if (!values.title.trim()) {
+      errors.title = "لطفا عنوان محصول را وارد کنید.";
+    } else if (values.title.trim().length < 3) {
+      errors.title = "عنوان محصول حداقل باید 3 کاراکتر باشد";
+    }
+
+    if (!values.shortName.trim()) {
+      errors.shortName = "لطفا نام کوتاه محصول را وارد کنید.";
+    } else if (values.shortName.trim().length < 3) {
+      errors.shortName = "نام کوتاه محصول حداقل باید 3 کاراکتر باشد";
+    }
+
+    if (!values.price) {
+      errors.price = "لطفا قیمت محصول را وارد نمایید";
+    } else if (+values.price < 0) {
+      errors.price = "لطفا قیمت محصول را به درستی وارد نمایید";
+    }
+
+    if (!values.discount) {
+      errors.discount = "لطفا تخفیف محصول را وارد نمایید";
+    } else if (+values.discount < 0 || +values.discount > 100) {
+      errors.discount = "لطفا تخفیف محصول را به درستی وارد نمایید";
+    }
+
+    if (!values.category) {
+      errors.category = "لطفا دسته بندی محصول را انتخاب نمایید";
+    }
+
+    return errors;
+  };
+
+  const onSubmit = (values) => {
+    if (infos.length == 0) {
+      Swal.fire({
+        title: "لطفا اطلاعات محصول را وارد نمایید",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+
+      return;
+    }
+  };
 
   return (
     <>

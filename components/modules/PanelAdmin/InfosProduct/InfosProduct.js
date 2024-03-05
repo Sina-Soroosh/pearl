@@ -2,7 +2,9 @@ import React from "react";
 import styles from "@/styles/modules/PanelAdmin/InfosProduct/InfosProduct.module.css";
 
 function InfosProduct({ value, changeValue }) {
-  const addValueHandler = () => {
+  const addValueHandler = (e) => {
+    e.preventDefault();
+
     changeValue((prevValue) => {
       const newValue = [...prevValue];
 
