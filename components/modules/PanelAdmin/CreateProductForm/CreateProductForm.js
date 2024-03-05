@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Formik } from "formik";
 import styles from "@/styles/modules/PanelAdmin/CreateProductForm/CreateProductForm.module.css";
 import dynamic from "next/dynamic";
+import InfosProduct from "../InfosProduct/InfosProduct";
 
 const EditorText = dynamic(
   () => {
@@ -12,6 +13,9 @@ const EditorText = dynamic(
 
 function CreateProductForm() {
   const [desc, setDesc] = useState("");
+  const [infos, setInfos] = useState([
+    { _id: crypto.randomUUID(), title: "", value: "" },
+  ]);
   const initialValues = {
     image: "",
     title: "",
@@ -130,13 +134,16 @@ function CreateProductForm() {
                     )}
                   </div>
                   <div className={`${styles.input_box}`}>
-                    <label htmlFor="category">
+                    <label>
                       توضیحات محصول <span>*</span>
                     </label>
                     <EditorText value={desc} changeValue={setDesc} />
-                    {touched.category && (
-                      <span className={styles.err}>{errors.category}</span>
-                    )}
+                  </div>
+                  <div className={`${styles.input_box}`}>
+                    <label>
+                      اطلاعات محصول <span>*</span>
+                    </label>
+                    <InfosProduct value={infos} changeValue={setInfos} />
                   </div>
                   <input
                     type="submit"

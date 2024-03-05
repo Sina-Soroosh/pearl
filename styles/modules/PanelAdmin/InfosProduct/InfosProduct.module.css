@@ -1,0 +1,50 @@
+.infos .content {
+    padding: 10px;
+}
+
+.infos .input_box {
+    margin: 5px 0;
+}
+
+.infos .input_box label {
+    font-size: 15px;
+    font-weight: 400;
+    color: #000;
+}
+
+.infos .input_box label span {
+    color: #8b0a0a;
+}
+
+
+.infos .input_box input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: #e3e3e3;
+    border: 1px solid #e3e3e3;
+    transition: .3s;
+}
+
+
+.infos .input_box input:focus {
+    border: 1px solid var(--orange);
+}
+
+.infos .delete_btn {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.infos .add_btn {
+    margin: 10px auto;
+}
+
+.infos .delete_btn button {
+    font-size: 12px;
+}
+
+.infos .add_btn button {
+    font-size: 15px;
+}
