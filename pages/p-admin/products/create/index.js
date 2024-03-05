@@ -3,10 +3,15 @@ import CreateForm from "@/panelAdminTemplates/Products/Create/CreateForm/CreateF
 import { connectToDB } from "@/config/db";
 import { getMe } from "@/utils/myAccount";
 import categoryModel from "@/models/category";
+import Head from "next/head";
 
 function Create(props) {
   return (
     <>
+      <Head>
+        <title>پنل مدیریت - ایجاد محصول</title>
+      </Head>
+
       <CreateForm categories={props.categories} />
     </>
   );
