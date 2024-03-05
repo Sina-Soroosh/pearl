@@ -1,0 +1,25 @@
+.update_form {
+    padding: 20px;
+}
+
+.update_form .content {
+    padding: 20px;
+    box-shadow: 0 0 10px 0px #00000026;
+}
+
+.update_form .content .top_form {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.update_form .content .title h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #000;
+}
+
+.update_form .content .create_product a {
+    font-size: 14px;
+}

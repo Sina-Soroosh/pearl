@@ -251,12 +251,12 @@ function ProductsDetails(props) {
                         />
                       </TableCell>
                       <TableCell className={styles.cell} align="right">
-                        <Link href={`/products/${product.shortName}`}>
+                        <Link href={`/p-admin/products/${product.shortName}`}>
                           {product.title}
                         </Link>
                       </TableCell>
                       <TableCell className={styles.cell} align="right">
-                        <Link href={`/products/${product.shortName}`}>
+                        <Link href={`/p-admin/products/${product.shortName}`}>
                           {product.shortName}
                         </Link>
                       </TableCell>
