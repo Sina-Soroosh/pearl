@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^6.2.0",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
@@ -20,6 +21,7 @@
     "@mui/x-data-grid": "^6.19.5",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^5.3.2",
+    "ckeditor5-custom-build": "^0.0.6",
     "cookie": "^0.6.0",
     "fastest-validator": "^1.17.0",
     "formidable": "^3.5.1",

@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "@/panelAdminStyles/Products/Create/CreateForm/CreateForm.module.css";
+import CreateProductForm from "@/panelAdminModules/CreateProductForm/CreateProductForm";
 import Link from "next/link";
 
 function CreateForm() {
@@ -17,7 +18,9 @@ function CreateForm() {
               </Link>
             </div>
           </div>
-          <div className={styles.form}></div>
+          <div className={styles.form}>
+            <CreateProductForm />
+          </div>
         </div>
       </div>
     </>
