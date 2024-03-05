@@ -13,15 +13,55 @@ const EditorText = dynamic(
   { ssr: false }
 );
 
-function UpdateProductForm({ categories }) {
-  const [desc, setDesc] = useState("");
-  const [infos, setInfos] = useState([]);
+function UpdateProductForm({ categories, product }) {
+  const router = useRouter();
+  const [desc, setDesc] = useState(product.desc);
+  const [infos, setInfos] = useState(product.infos);
   const initialValues = {
-    title: "",
-    shortName: "",
-    price: "",
-    discount: "",
-    category: "",
+    title: product.title,
+    shortName: product.shortName,
+    price: product.price,
+    discount: product.discount,
+    category: product.category._id,
+  };
+
+  const updateProductHandler = async (data, swal) => {
+    const res = await fetch(`/api/products/${product.shortName}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    swal.close();
+
+    switch (res.status) {
+      case 422:
+        Swal.fire({
+          title: "قبلا از این نام کوتاه استفاده شده است.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 200:
+        Swal.fire({
+          title: "محصول با موفقیت بروزرسانی شد.",
+          icon: "success",
+          confirmButtonText: "باشه",
+        }).then(() => {
+          router.push("/p-admin/products");
+        });
+        break;
+
+      default:
+        Swal.fire({
+          title: "خطایی رخ داده. \n اتصال خود را چک کنید",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+    }
   };
 
   const validateHandler = (values) => {
@@ -45,9 +85,7 @@ function UpdateProductForm({ categories }) {
       errors.price = "لطفا قیمت محصول را به درستی وارد نمایید";
     }
 
-    if (!values.discount) {
-      errors.discount = "لطفا تخفیف محصول را وارد نمایید";
-    } else if (+values.discount < 0 || +values.discount > 100) {
+    if (+values.discount < 0 || +values.discount > 100) {
       errors.discount = "لطفا تخفیف محصول را به درستی وارد نمایید";
     }
 
@@ -78,6 +116,22 @@ function UpdateProductForm({ categories }) {
 
       return;
     }
+
+    const newInfos = infos.map((info) => ({
+      title: info.title,
+      value: info.value,
+    }));
+
+    Swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        updateProductHandler({ ...values, desc, infos: newInfos }, Swal);
+      },
+    });
   };
 
   return (
@@ -94,10 +148,7 @@ function UpdateProductForm({ categories }) {
                 <div className="row">
                   <div className="col-md-6">
                     <div className={`${styles.image}`}>
-                      <img
-                        src="/images/products/520c7dbee04ab52bfd3f4441b.png"
-                        alt=""
-                      />
+                      <img src={product.image} alt={product.title} />
                     </div>
                   </div>
                   <div className="col-md-6 row">
@@ -196,7 +247,7 @@ function UpdateProductForm({ categories }) {
                   </div>
                   <input
                     type="submit"
-                    value="افزودن محصول"
+                    value="بروزرسانی محصول"
                     className={styles.submit_btn}
                   />
                 </div>

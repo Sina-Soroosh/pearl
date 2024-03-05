@@ -67,9 +67,7 @@ function CreateProductForm({ categories }) {
       errors.price = "لطفا قیمت محصول را به درستی وارد نمایید";
     }
 
-    if (!values.discount) {
-      errors.discount = "لطفا تخفیف محصول را وارد نمایید";
-    } else if (+values.discount < 0 || +values.discount > 100) {
+    if (+values.discount < 0 || +values.discount > 100) {
       errors.discount = "لطفا تخفیف محصول را به درستی وارد نمایید";
     }
 

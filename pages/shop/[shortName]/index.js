@@ -54,7 +54,7 @@ export const getServerSideProps = async (context) => {
   return {
     props: {
       product: JSON.parse(JSON.stringify(product)),
-      comments: JSON.parse(JSON.stringify(comments)),
+      comments: JSON.parse(JSON.stringify([...comments].reverse())),
       user: JSON.parse(JSON.stringify(user)),
       relatedProducts: JSON.parse(JSON.stringify(relatedProducts.slice(0, 4))),
     },

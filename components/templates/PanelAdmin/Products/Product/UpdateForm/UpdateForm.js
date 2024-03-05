@@ -3,7 +3,7 @@ import styles from "@/panelAdminStyles/Products/Product/UpdateForm/UpdateForm.mo
 import Link from "next/link";
 import UpdateProductForm from "@/panelAdminModules/UpdateProductForm/UpdateProductForm";
 
-function UpdateForm() {
+function UpdateForm(props) {
   return (
     <>
       <div className={styles.update_form}>
@@ -19,7 +19,10 @@ function UpdateForm() {
             </div>
           </div>
           <div className={styles.form}>
-            <UpdateProductForm categories={[{ _id: 23, title: "js" }]} />
+            <UpdateProductForm
+              categories={props.categories}
+              product={props.product}
+            />
           </div>
         </div>
       </div>
