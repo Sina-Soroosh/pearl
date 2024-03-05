@@ -3,7 +3,7 @@ import styles from "@/panelAdminStyles/Products/Create/CreateForm/CreateForm.mod
 import CreateProductForm from "@/panelAdminModules/CreateProductForm/CreateProductForm";
 import Link from "next/link";
 
-function CreateForm() {
+function CreateForm(props) {
   return (
     <>
       <div className={styles.create_form}>
@@ -19,7 +19,7 @@ function CreateForm() {
             </div>
           </div>
           <div className={styles.form}>
-            <CreateProductForm />
+            <CreateProductForm categories={props.categories} />
           </div>
         </div>
       </div>

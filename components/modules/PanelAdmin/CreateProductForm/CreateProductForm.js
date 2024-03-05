@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Formik } from "formik";
 import styles from "@/styles/modules/PanelAdmin/CreateProductForm/CreateProductForm.module.css";
 import dynamic from "next/dynamic";
 import InfosProduct from "../InfosProduct/InfosProduct";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 
 const EditorText = dynamic(
   () => {
@@ -12,7 +13,9 @@ const EditorText = dynamic(
   { ssr: false }
 );
 
-function CreateProductForm() {
+function CreateProductForm({ categories }) {
+  const router = useRouter();
+  const imageRef = useRef();
   const [desc, setDesc] = useState("");
   const [infos, setInfos] = useState([
     { _id: crypto.randomUUID(), title: "", value: "" },
@@ -77,7 +80,53 @@ function CreateProductForm() {
     return errors;
   };
 
+  const addProductHandler = async (data, swal) => {
+    const res = await fetch("/api/products", {
+      method: "POST",
+      body: data,
+    });
+
+    swal.close();
+
+    switch (res.status) {
+      case 422:
+        Swal.fire({
+          title: "قبلا از این نام کوتاه استفاده شده است.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 201:
+        Swal.fire({
+          title: "محصول با موفقیت اضافه شد.",
+          icon: "success",
+          confirmButtonText: "باشه",
+        }).then(() => {
+          router.push("/p-admin/products");
+        });
+        break;
+
+      default:
+        Swal.fire({
+          title: "خطایی رخ داده. \n اتصال خود را چک کنید",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+    }
+  };
+
   const onSubmit = (values) => {
+    if (!desc) {
+      Swal.fire({
+        title: "لطفا توضیحات محصول را وارد نمایید",
+        icon: "error",
+        confirmButtonText: "باشه",
+      });
+
+      return;
+    }
+
     if (infos.length == 0) {
       Swal.fire({
         title: "لطفا اطلاعات محصول را وارد نمایید",
@@ -87,6 +136,34 @@ function CreateProductForm() {
 
       return;
     }
+
+    const formData = new FormData();
+
+    formData.append("image", imageRef.current.files[0]);
+    formData.append("title", values.title);
+    formData.append("shortName", values.shortName);
+    formData.append("desc", desc);
+    formData.append("price", values.price);
+    formData.append("discount", values.discount);
+    formData.append("isAvailable", true);
+    formData.append("category", values.category);
+    formData.append(
+      "infos",
+      JSON.stringify(
+        infos.map((info) => ({ title: info.title, value: info.value }))
+      )
+    );
+
+    Swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        addProductHandler(formData, Swal);
+      },
+    });
   };
 
   return (
@@ -111,6 +188,7 @@ function CreateProductForm() {
                       value={values.image}
                       onChange={handleChange}
                       accept=".png, .jpg, .jpeg"
+                      ref={imageRef}
                     />
                     {touched.image && (
                       <span className={styles.err}>{errors.image}</span>
@@ -186,8 +264,11 @@ function CreateProductForm() {
                       onChange={handleChange}
                     >
                       <option value="">دسته بندی محصول را انتخاب کنید</option>
-                      <option value="chairs">صندلی</option>
-                      <option value="watches">ساعت</option>
+                      {categories.map((category) => (
+                        <option value={category._id} key={category._id}>
+                          {category.title}
+                        </option>
+                      ))}
                     </select>
                     {touched.category && (
                       <span className={styles.err}>{errors.category}</span>
