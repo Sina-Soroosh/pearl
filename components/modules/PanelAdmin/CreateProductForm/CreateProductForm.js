@@ -1,8 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { Formik } from "formik";
 import styles from "@/styles/modules/PanelAdmin/CreateProductForm/CreateProductForm.module.css";
+import dynamic from "next/dynamic";
+
+const EditorText = dynamic(
+  () => {
+    return import("../EditorText/EditorText");
+  },
+  { ssr: false }
+);
 
 function CreateProductForm() {
+  const [desc, setDesc] = useState("");
   const initialValues = {
     image: "",
     title: "",
@@ -124,6 +133,7 @@ function CreateProductForm() {
                     <label htmlFor="category">
                       توضیحات محصول <span>*</span>
                     </label>
+                    <EditorText value={desc} changeValue={setDesc} />
                     {touched.category && (
                       <span className={styles.err}>{errors.category}</span>
                     )}
