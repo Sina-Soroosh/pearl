@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/panelAdminStyles/Products/Product/UpdateForm/UpdateForm.module.css";
 import Link from "next/link";
+import UpdateProductForm from "@/panelAdminModules/UpdateProductForm/UpdateProductForm";
 
 function UpdateForm() {
   return (
@@ -17,7 +18,9 @@ function UpdateForm() {
               </Link>
             </div>
           </div>
-          <div className={styles.form}></div>
+          <div className={styles.form}>
+            <UpdateProductForm categories={[{ _id: 23, title: "js" }]} />
+          </div>
         </div>
       </div>
     </>

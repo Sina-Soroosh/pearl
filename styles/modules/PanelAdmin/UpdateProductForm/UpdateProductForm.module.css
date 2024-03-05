@@ -1,0 +1,58 @@
+.form {
+    margin: 10px 0;
+}
+
+.form .input_box {
+    margin: 5px 0;
+}
+
+.form .input_box label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #000;
+}
+
+.form .input_box label span {
+    color: #8b0a0a;
+}
+
+.form .image img {
+    max-width: 100%;
+    height: 300px;
+    display: block;
+    margin: 10px auto;
+}
+
+.form .input_box select,
+.form .input_box input {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    background: #e3e3e3;
+    border: 1px solid #e3e3e3;
+    transition: .3s;
+}
+
+.form .input_box input:focus,
+.form .input_box select:focus {
+    border: 1px solid var(--orange);
+}
+
+.form .input_box .err {
+    font-size: 15px;
+    color: #8b0505;
+}
+
+.form .submit_btn {
+    width: auto;
+    border: none;
+    padding: 5px 30px;
+    margin: 10px;
+    background: var(--orange);
+    color: #fff;
+    transition: .3s;
+}
+
+.form .submit_btn:hover {
+    opacity: .9;
+}
