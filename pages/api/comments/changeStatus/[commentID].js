@@ -51,7 +51,11 @@ const changeStatus = async (req, res) => {
           { sum: 0, length: 0 }
         );
 
-        const newRating = Math.round(sumRating.sum / sumRating.length);
+        let newRating = 0;
+
+        if (sumRating.length > 0) {
+          newRating = Math.round(sumRating.sum / sumRating.length);
+        }
 
         await productModel.findOneAndUpdate(
           { _id: comment.product },
