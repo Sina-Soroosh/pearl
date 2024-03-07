@@ -131,12 +131,12 @@ function SideBar() {
           </li>
           <li>
             <div className={styles.icon_link}>
-              <a href="/p-admin/users">
+              <Link href="/p-admin/users">
                 <i>
                   <FiUsers />
                 </i>
                 <span className={styles.link_name}>کاربران</span>
-              </a>
+              </Link>
               <i className="bx bxs-chevron-down arrow" />
             </div>
           </li>

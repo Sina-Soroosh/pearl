@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "@/panelAdminStyles/Users/CreateUser/CreateUser.module.css";
 import { Formik } from "formik";
+import Swal from "sweetalert2";
 
 function CreateUser() {
   const initialValues = {
@@ -8,6 +9,49 @@ function CreateUser() {
     email: "",
     password: "",
     role: "USER",
+  };
+
+  const createUserHandler = async (values, swal) => {
+    const res = await fetch("/api/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    swal.close();
+
+    switch (res.status) {
+      case 400:
+        Swal.fire({
+          title: "مقادیر ارسالی معتبر نیست",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 422:
+        Swal.fire({
+          title: "قبلا این نام کاربری یا ایمیل استفاده شده",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 201:
+        Swal.fire({
+          title: "کاربر با موفقیت اضافه شد.",
+          icon: "success",
+          confirmButtonText: "باشه",
+        }).then(() => location.reload());
+        break;
+      default:
+        Swal.fire({
+          title: "خطایی رخ داده. \n لطفا اتصال خود را چک کنید.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+    }
   };
 
   const validateHandler = (values) => {
@@ -35,7 +79,18 @@ function CreateUser() {
     return errors;
   };
 
-  const onSubmit = (values) => {};
+  const onSubmit = (values) => {
+    Swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        createUserHandler(values, Swal);
+      },
+    });
+  };
 
   return (
     <div className={styles.create_form}>

@@ -17,3 +17,20 @@
     color: #000;
     text-decoration: underline;
 }
+
+.form_update {
+    text-align: right;
+}
+
+.form_update label {
+    margin-bottom: 5px;
+    font-size: 13px;
+    color: #000;
+    font-weight: 700;
+}
+
+.form_update input {
+    font-size: 13px;
+    margin-bottom: 5px;
+    width: 100%;
+}
