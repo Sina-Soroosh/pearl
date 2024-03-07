@@ -185,6 +185,7 @@ function CategoriesDetails(props) {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
             rowsLength={categories.length}
+            isPagination={true}
           >
             {categories
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

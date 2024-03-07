@@ -232,6 +232,7 @@ function ProductsDetails(props) {
               rowsPerPage={rowsPerPage}
               setRowsPerPage={setRowsPerPage}
               rowsLength={products.length}
+              isPagination={true}
             >
               {products
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

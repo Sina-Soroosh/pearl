@@ -152,6 +152,7 @@ function CommentsTable({ commentsInfos, shortName }) {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
             rowsLength={comments.length}
+            isPagination={true}
           >
             {comments
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

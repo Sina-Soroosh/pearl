@@ -21,6 +21,7 @@ function TableDetails({
   setRowsPerPage,
   rowsLength,
   children,
+  isPagination,
 }) {
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,15 +52,17 @@ function TableDetails({
           <TableBody>{children}</TableBody>
         </Table>
       </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rowsLength}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
+      {isPagination ? (
+        <TablePagination
+          rowsPerPageOptions={[10, 25, 100]}
+          component="div"
+          count={rowsLength}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      ) : null}
     </Paper>
   );
 }

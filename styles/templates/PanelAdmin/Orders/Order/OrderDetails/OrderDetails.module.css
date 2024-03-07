@@ -1,0 +1,54 @@
+.details {
+    padding: 20px;
+}
+
+.details .content {
+    padding: 20px;
+    box-shadow: 0 0 10px 0px #00000026;
+}
+
+.details .content h3 {
+    font-size: 20px;
+    color: #000;
+    font-weight: 800;
+}
+
+.details a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.details .top_details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.details .top_details .buttons button {
+    margin-right: 5px;
+}
+
+.details .text {
+    margin: 20px 5px 10px 5px;
+}
+
+.details .text p {
+    font-size: 15px;
+    color: #aaaaaa;
+}
+
+.details .text p span {
+    font-weight: 700;
+    background-color: var(--gray);
+    color: #000;
+    padding: 0 5px;
+    display: inline-block;
+}
+
+@media screen and (max-width : 767px) {
+    .details .top_details .buttons button {
+        display: block;
+        margin: 0 0 5px 0;
+    }
+
+}

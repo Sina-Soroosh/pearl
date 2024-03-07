@@ -146,6 +146,7 @@ function OrdersDetails(props) {
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
             rowsLength={orders.length}
+            isPagination={true}
           >
             {orders
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
