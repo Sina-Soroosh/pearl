@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "@/panelAdminStyles/Sliders/CreateSlider/CreateSlider.module.css";
 import { Formik } from "formik";
 import Swal from "sweetalert2";
 
-function CreateSlider() {
+function CreateSlider({ products }) {
+  const imageRef = useRef();
   const initialValues = {
     image: "",
     title: "",
     text: "",
-    product: "",
+    product: products[0].shortName,
   };
 
   const validateHandler = (values) => {
@@ -46,7 +47,58 @@ function CreateSlider() {
     return errors;
   };
 
-  const onSubmit = (values) => {};
+  const createSliderHandler = async (values, swal) => {
+    const res = await fetch("/api/sliders", {
+      method: "POST",
+      body: values,
+    });
+
+    swal.close();
+
+    switch (res.status) {
+      case 400:
+        Swal.fire({
+          title: "مقادیر ارسالی معتبر نیست",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 201:
+        Swal.fire({
+          title: "اسلایدر با موفقیت اضافه شد.",
+          icon: "success",
+          confirmButtonText: "باشه",
+        }).then(() => location.reload());
+        break;
+      default:
+        Swal.fire({
+          title: "خطایی رخ داده. \n لطفا اتصال خود را چک کنید.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+    }
+  };
+
+  const onSubmit = (values) => {
+    const formData = new FormData();
+
+    formData.append("image", imageRef.current.files[0]);
+    formData.append("title", values.title);
+    formData.append("text", values.text);
+    formData.append("product", values.product);
+
+    Swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        createSliderHandler(formData, Swal);
+      },
+    });
+  };
 
   return (
     <div className={styles.create_form}>
@@ -72,6 +124,7 @@ function CreateSlider() {
                         value={values.image}
                         accept=".png, .jpg, .jpeg"
                         onChange={handleChange}
+                        ref={imageRef}
                       />
                       {touched.image && (
                         <span className={styles.err}>{errors.image}</span>
@@ -114,8 +167,11 @@ function CreateSlider() {
                         value={values.product}
                         onChange={handleChange}
                       >
-                        <option value="">مبل</option>
-                        <option value="">میز</option>
+                        {products.map((product) => (
+                          <option value={product.shortName} key={product._id}>
+                            {product.title}
+                          </option>
+                        ))}
                       </select>
                     </div>
                     <div className="col-12">
