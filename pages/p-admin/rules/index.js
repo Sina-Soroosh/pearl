@@ -34,7 +34,7 @@ export const getServerSideProps = async (ctx) => {
 
   return {
     props: {
-      rules: JSON.parse(JSON.stringify(rules.reverse())),
+      rules: JSON.parse(JSON.stringify(rules)),
     },
   };
 };

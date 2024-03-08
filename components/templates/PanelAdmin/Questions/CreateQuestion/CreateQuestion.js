@@ -21,15 +21,62 @@ function CreateQuestion() {
     const errors = {};
 
     if (!values.title.trim()) {
-      errors.title = "لطفا عنوان قانون را وارد کنید";
+      errors.title = "لطفا عنوان سوال را وارد کنید";
     } else if (values.title.trim().length < 3) {
-      errors.title = "عنوان قانون باید حداقل 3 کارکتر باشد";
+      errors.title = "عنوان سوال باید حداقل 3 کارکتر باشد";
     }
 
     return errors;
   };
 
-  const onSubmit = (values) => {};
+  const createQuestionHandler = async (values, swal) => {
+    const res = await fetch("/api/faqs", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    });
+
+    swal.close();
+
+    switch (res.status) {
+      case 400:
+        Swal.fire({
+          title: "مقادیر ارسالی معتبر نیست",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+      case 201:
+        Swal.fire({
+          title: "سوال با موفقیت اضافه شد.",
+          icon: "success",
+          confirmButtonText: "باشه",
+        }).then(() => location.reload());
+        break;
+      default:
+        Swal.fire({
+          title: "خطایی رخ داده. \n لطفا اتصال خود را چک کنید.",
+          icon: "error",
+          confirmButtonText: "باشه",
+        });
+        break;
+    }
+  };
+
+  const onSubmit = (values) => {
+    Swal.fire({
+      title: "لطفا چند لحظه صبر کنید",
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+
+        createQuestionHandler({ ...values, body }, Swal);
+      },
+    });
+  };
 
   return (
     <div className={styles.create_form}>
