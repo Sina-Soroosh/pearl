@@ -1,4 +1,5 @@
 import fs from "fs";
+const cloudinary = require("cloudinary").v2;
 
 const saveFile = async (file) => {
   const data = fs.readFileSync(file[0]._writeStream.path);
@@ -7,4 +8,21 @@ const saveFile = async (file) => {
   return `/images/products/${file[0].newFilename}.png`;
 };
 
-export { saveFile };
+const configCloudinary = () => {
+  return cloudinary.config({
+    secure: true,
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+  });
+};
+
+const optionsCloudinary = () => {
+  return {
+    use_filename: true,
+    unique_filename: false,
+    overwrite: true,
+  };
+};
+
+export { saveFile, configCloudinary, optionsCloudinary };

@@ -1,11 +1,12 @@
 import { connectToDB } from "@/config/db";
 import categoryModel from "@/models/category";
 import productModel from "@/models/product";
-import { saveFile } from "@/utils/file";
+import { configCloudinary, optionsCloudinary } from "@/utils/file";
 import { getMe } from "@/utils/myAccount";
 import productCheck from "@/validators/product";
 import formidable from "formidable";
 import { isValidObjectId } from "mongoose";
+const cloudinary = require("cloudinary").v2;
 
 export const config = {
   api: {
@@ -15,6 +16,8 @@ export const config = {
 
 const products = async (req, res) => {
   await connectToDB();
+
+  await configCloudinary();
 
   try {
     const productsData = await productModel.find().populate("category");
@@ -40,6 +43,7 @@ const products = async (req, res) => {
           try {
             productInfo = {
               image: "",
+              imageID: "",
               title: fields.title[0],
               shortName: fields.shortName[0],
               desc: fields.desc[0],
@@ -82,9 +86,15 @@ const products = async (req, res) => {
             });
           }
 
-          const image = await saveFile(files.image);
+          const options = optionsCloudinary();
 
-          productInfo.image = image;
+          const result = await cloudinary.uploader.upload(
+            files.image[0].filepath,
+            options
+          );
+
+          productInfo.image = result.secure_url;
+          productInfo.imageID = result.public_id;
 
           await productModel.create(productInfo);
 

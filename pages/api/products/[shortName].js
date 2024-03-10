@@ -3,9 +3,11 @@ import cartModel from "@/models/cart";
 import categoryModel from "@/models/category";
 import commentModel from "@/models/comment";
 import productModel from "@/models/product";
+import { configCloudinary } from "@/utils/file";
 import { getMe } from "@/utils/myAccount";
 import productCheck from "@/validators/product";
 import { isValidObjectId } from "mongoose";
+const cloudinary = require("cloudinary").v2;
 
 const product = async (req, res) => {
   await connectToDB();
@@ -112,6 +114,8 @@ const product = async (req, res) => {
             .json({ message: "You don't access to data !!" });
         }
 
+        await configCloudinary();
+
         await cartModel.updateMany(
           {
             "products.product": product._id,
@@ -120,6 +124,11 @@ const product = async (req, res) => {
         );
 
         await commentModel.deleteMany({ product: product._id });
+
+        await cloudinary.api.delete_resources(product.imageID, {
+          type: "upload",
+          resource_type: "image",
+        });
 
         await productModel.findOneAndDelete({ _id: product._id });
 

@@ -14,6 +14,10 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    imageID: {
+      type: String,
+      required: true,
+    },
     shortName: {
       type: String,
       minLength: 3,
