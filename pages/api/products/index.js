@@ -17,8 +17,6 @@ export const config = {
 const products = async (req, res) => {
   await connectToDB();
 
-  await configCloudinary();
-
   try {
     const productsData = await productModel.find().populate("category");
 
@@ -34,6 +32,8 @@ const products = async (req, res) => {
             .status(403)
             .json({ message: "You don't access to data !!" });
         }
+
+        await configCloudinary();
 
         const form = formidable();
 

@@ -1,7 +1,9 @@
 import { connectToDB } from "@/config/db";
 import sliderModel from "@/models/slider";
+import { configCloudinary } from "@/utils/file";
 import { getMe } from "@/utils/myAccount";
 import { isValidObjectId } from "mongoose";
+const cloudinary = require("cloudinary").v2;
 
 const slider = async (req, res) => {
   await connectToDB();
@@ -33,6 +35,13 @@ const slider = async (req, res) => {
   try {
     switch (req.method) {
       case "DELETE": {
+        await configCloudinary();
+
+        await cloudinary.api.delete_resources(slider.imageID, {
+          type: "upload",
+          resource_type: "image",
+        });
+
         await sliderModel.findOneAndDelete({ _id: sliderID });
 
         return res.json({ message: "Remove slider successfully :))" });

@@ -1,10 +1,11 @@
 import { connectToDB } from "@/config/db";
 import productModel from "@/models/product";
 import sliderModel from "@/models/slider";
-import { saveFile } from "@/utils/file";
+import { configCloudinary, optionsCloudinary } from "@/utils/file";
 import { getMe } from "@/utils/myAccount";
 import sliderCheck from "@/validators/slider";
 import formidable from "formidable";
+const cloudinary = require("cloudinary").v2;
 
 export const config = {
   api: {
@@ -31,6 +32,8 @@ const sliders = async (req, res) => {
             .json({ message: "You don't access to data !!" });
         }
 
+        await configCloudinary();
+
         const form = formidable();
 
         form.parse(req, async function (err, fields, files) {
@@ -39,6 +42,7 @@ const sliders = async (req, res) => {
           try {
             sliderInfo = {
               image: "",
+              imageID: "",
               title: fields.title[0],
               product: fields.product[0],
               text: fields.text[0],
@@ -61,9 +65,15 @@ const sliders = async (req, res) => {
             return res.status(404).json({ message: "NotFound product !!" });
           }
 
-          const image = await saveFile(files.image);
+          const options = optionsCloudinary();
 
-          sliderInfo.image = image;
+          const result = await cloudinary.uploader.upload(
+            files.image[0].filepath,
+            options
+          );
+
+          sliderInfo.image = result.secure_url;
+          sliderInfo.imageID = result.public_id;
 
           await sliderModel.create(sliderInfo);
 
