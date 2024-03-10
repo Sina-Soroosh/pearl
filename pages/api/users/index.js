@@ -1,5 +1,6 @@
 import { connectToDB } from "@/config/db";
 import addressModel from "@/models/address";
+import cartModel from "@/models/cart";
 import userModel from "@/models/user";
 import { generateToken, hashedPasswordHandler } from "@/utils/auth";
 import { getMe } from "@/utils/myAccount";
@@ -117,6 +118,12 @@ const users = async (req, res) => {
         await addressModel.create({
           user: userCreated._id,
         });
+
+        await cartModel.create({
+          user: userCreated._id,
+          products: [],
+        });
+
         return res.status(201).json({ message: "Create user successfully :)" });
       }
       default:
