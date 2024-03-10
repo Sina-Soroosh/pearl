@@ -91,7 +91,6 @@ const product = async (req, res) => {
         }
 
         if (shortName !== shortNameBody) {
-          console.log(isValidProductInfo);
           const isProductExist = await productModel.findOne({
             shortName: productInfo.shortName,
           });

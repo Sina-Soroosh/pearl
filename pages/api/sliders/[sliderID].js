@@ -37,7 +37,7 @@ const slider = async (req, res) => {
       case "DELETE": {
         await configCloudinary();
 
-        await cloudinary.api.delete_resources(slider.imageID, {
+        await cloudinary.api.delete_resources(product.imageID, {
           type: "upload",
           resource_type: "image",
         });

@@ -17,4 +17,4 @@ const optionsCloudinary = () => {
   };
 };
 
-export { saveFile, configCloudinary, optionsCloudinary };
+export { configCloudinary, optionsCloudinary };
