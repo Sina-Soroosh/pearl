@@ -67,7 +67,9 @@ function SideBar() {
       ) : null}
       <div className={`${styles.sidebar} ${isShowMenu ? "" : styles.close}`}>
         <div className={styles.logo_details}>
-          <img src="/images/logo/pearl-favicon-color.png" alt="logo" />
+          <Link href="/">
+            <img src="/images/logo/pearl-favicon-color.png" alt="logo" />
+          </Link>
           <span
             className={styles.logo_close}
             onClick={() => setIsShowMenu(false)}
