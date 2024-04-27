@@ -172,6 +172,7 @@ function Main(props) {
                         style={{
                           fontSize: "17px",
                           fontWeight: 700,
+						  fontFamily : "var(--font)"
                         }}
                         label="توضیحات"
                         value="description"
@@ -180,6 +181,7 @@ function Main(props) {
                         style={{
                           fontSize: "17px",
                           fontWeight: 700,
+						  fontFamily : "var(--font)"
                         }}
                         label="توضیحات تکمیلی"
                         value="details"
@@ -188,6 +190,7 @@ function Main(props) {
                         style={{
                           fontSize: "17px",
                           fontWeight: 700,
+						  fontFamily : "var(--font)"
                         }}
                         label="نظرات"
                         value="comments"

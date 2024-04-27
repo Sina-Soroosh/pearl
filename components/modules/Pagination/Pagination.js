@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@/styles/modules/Pagination/Pagination.module.css";
 import { useRouter } from "next/router";
+import { IoIosArrowBack,IoIosArrowForward  } from "react-icons/io";
 
 function Pagination({ lastPage }) {
   const router = useRouter();
@@ -33,7 +34,7 @@ function Pagination({ lastPage }) {
             className={styles.prev_page}
             onClick={() => changePage(pageActive - 1)}
           >
-            <span>قبلی</span>
+            <span><IoIosArrowBack /></span>
           </li>
         )}
         {Array(lastPage)
@@ -53,7 +54,7 @@ function Pagination({ lastPage }) {
             className={styles.next_page}
             onClick={() => changePage(+pageActive + 1)}
           >
-            <span>بعدی</span>
+            <span><IoIosArrowForward /></span>
           </li>
         )}
       </ul>

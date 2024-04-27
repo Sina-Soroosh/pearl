@@ -65,4 +65,9 @@ i {
   color: #adadad !important;
 }
 
+.OrderBy_order__Vo54E *,
+.OrderBy_order_item__8EWBL{
+	font-family: var(--font) !important;
+}
+
 /* Finish Default Styles */
