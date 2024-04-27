@@ -1,9 +1,16 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "@/styles/templates/faq/Main.module.css";
 import Breadcrumb from "@/components/modules/Breadcrumb/Breadcrumb";
 import AccordionBox from "@/components/modules/AccordionBox/AccordionBox";
+import { Accordion } from "@mui/material";
 
 function Main({ faqs }) {
+		  const [expanded, setExpanded] = useState(false);
+	
+	const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+	
   return (
     <>
       <Breadcrumb
@@ -13,9 +20,9 @@ function Main({ faqs }) {
 
       <div className={styles.faq}>
         <div className={styles.content}>
-          {faqs.map((question) => (
-            <AccordionBox key={question._id} {...question} />
-          ))}
+            {faqs.map((question) => (
+              <AccordionBox key={question._id} {...question} onChange={handleChange} expanded={expanded === question._id} />
+            ))}
         </div>
       </div>
     </>
