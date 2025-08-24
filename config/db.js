@@ -1,8 +1,7 @@
 import { MongoClient } from "mongodb";
 import mongoose from "mongoose";
 
-const uri =
-  "mongodb://root:RQIWwklncXhknnYVTabjZ91F@taftan.liara.cloud:33515/my-app?authSource=admin";
+const uri = process.env.MONGODB_URI;
 
 const connectToDB = async () => {
   try {
