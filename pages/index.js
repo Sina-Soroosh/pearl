@@ -24,7 +24,7 @@ function Home({ categories, products, sliders }) {
   );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   await connectToDB();
 
   const categories = await categoryModel.find().populate("products").lean();
@@ -40,7 +40,6 @@ export async function getStaticProps() {
       products: JSON.parse(JSON.stringify(popularProducts)),
       sliders: JSON.parse(JSON.stringify(sliders)),
     },
-    revalidate: 60 * 60 * 12,
   };
 }
 
