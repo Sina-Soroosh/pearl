@@ -3,7 +3,7 @@
 > Pearl store site with next js developed with page router
 >
 
-## [Live Demo](https://pearl.liara.run/)
+## [Live Demo](https://pearl-gamma.vercel.app/)
 
 ## Built With
 
